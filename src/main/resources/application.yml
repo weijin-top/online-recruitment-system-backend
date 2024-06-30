@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: online-recruitment-system
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: w20040410
+    url: jdbc:mysql://localhost:3306/db_recruitment?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8
+
+
+mybatis-plus:
+  global-config:
+    db-config:
+      id-type: auto
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
