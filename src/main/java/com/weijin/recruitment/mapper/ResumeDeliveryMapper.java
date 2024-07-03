@@ -1,6 +1,6 @@
 package com.weijin.recruitment.mapper;
 
-import com.weijin.recruitment.entity.ResumeDelivery;
+import com.weijin.recruitment.model.entity.ResumeDelivery;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**

@@ -1,6 +1,6 @@
 package com.weijin.recruitment.mapper;
 
-import com.weijin.recruitment.entity.Project;
+import com.weijin.recruitment.model.entity.Project;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**

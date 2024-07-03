@@ -1,6 +1,6 @@
 package com.weijin.recruitment.service.impl;
 
-import com.weijin.recruitment.entity.ResumeDelivery;
+import com.weijin.recruitment.model.entity.ResumeDelivery;
 import com.weijin.recruitment.mapper.ResumeDeliveryMapper;
 import com.weijin.recruitment.service.IResumeDeliveryService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

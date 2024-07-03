@@ -15,3 +15,8 @@ mybatis-plus:
   configuration:
     map-underscore-to-camel-case: true
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+
+jwt:
+  secret: aofklasndflkasndkasherwlansldkgnflks6fas56f4a9sfasfhsjfhwi3435w3223423424
+  expire-time: 259200000

@@ -1,6 +1,6 @@
 package com.weijin.recruitment.service;
 
-import com.weijin.recruitment.entity.Position;
+import com.weijin.recruitment.model.entity.Position;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

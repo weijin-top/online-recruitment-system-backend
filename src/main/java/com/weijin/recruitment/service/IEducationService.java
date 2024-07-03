@@ -1,6 +1,6 @@
 package com.weijin.recruitment.service;
 
-import com.weijin.recruitment.entity.Education;
+import com.weijin.recruitment.model.entity.Education;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

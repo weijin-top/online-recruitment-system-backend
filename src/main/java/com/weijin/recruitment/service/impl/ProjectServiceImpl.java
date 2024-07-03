@@ -1,6 +1,6 @@
 package com.weijin.recruitment.service.impl;
 
-import com.weijin.recruitment.entity.Project;
+import com.weijin.recruitment.model.entity.Project;
 import com.weijin.recruitment.mapper.ProjectMapper;
 import com.weijin.recruitment.service.IProjectService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

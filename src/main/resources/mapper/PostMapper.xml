@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.weijin.recruitment.mapper.PostMapper">
+
+    <select id="selectParentPosts" resultMap="postMap">
+        select id, parent_id, name
+        from t_post
+        where is_deleted = 0
+          and parent_id is null
+    </select>
+    <select id="selectChildPosts" resultType="com.weijin.recruitment.model.vo.post.PostVO">
+        select id, parent_id, name
+        from t_post
+        where is_deleted = 0
+          and parent_id = #{parentId}
+    </select>
+    <resultMap id="postMap" type="com.weijin.recruitment.model.vo.post.PostVO">
+        <id column="id" property="id"/>
+        <collection property="postVOS" autoMapping="true" column="id"
+                    ofType="com.weijin.recruitment.model.vo.post.PostVO"
+                    select="com.weijin.recruitment.mapper.PostMapper.selectChildPosts"/>
+    </resultMap>
+</mapper>

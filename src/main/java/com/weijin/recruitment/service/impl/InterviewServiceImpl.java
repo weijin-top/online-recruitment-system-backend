@@ -1,6 +1,6 @@
 package com.weijin.recruitment.service.impl;
 
-import com.weijin.recruitment.entity.Interview;
+import com.weijin.recruitment.model.entity.Interview;
 import com.weijin.recruitment.mapper.InterviewMapper;
 import com.weijin.recruitment.service.IInterviewService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
