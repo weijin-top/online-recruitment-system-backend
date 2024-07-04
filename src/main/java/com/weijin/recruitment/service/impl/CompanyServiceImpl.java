@@ -49,7 +49,7 @@ public class CompanyServiceImpl extends ServiceImpl<CompanyMapper, Company> impl
     }
 
     @Override
-    public Result<IPage<CompanyVO>> getCompanies(Integer pageNum, Integer pageSize, Integer status) {
+    public Result<IPage<CompanyVO>> queryCompanies(Integer pageNum, Integer pageSize, Integer status) {
         if (Objects.nonNull(status) && (status < 0 || status > 2)) {
             return Result.failed("审核状态只能是0-3");
         }
@@ -66,7 +66,7 @@ public class CompanyServiceImpl extends ServiceImpl<CompanyMapper, Company> impl
     }
 
     @Override
-    public Result<CompanyVO> getSingle(Integer id) {
+    public Result<CompanyVO> querySingle(Integer id) {
         //校验管理员不给企业信息id
         if (Objects.isNull(id) && Objects.equals(SecurityUtil.getRole(), RoleEnum.getRole(3))) {
             return Result.failed("企业信息id不能为空");

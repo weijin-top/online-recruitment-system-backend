@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.1.0</version>
-		<relativePath/> <!-- lookup parent from repository -->
-	</parent>
-	<groupId>com.weijin.recruitment</groupId>
-	<artifactId>online-recruitment-system</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>online-recruitment-system</name>
-	<description>online-recruitment-system</description>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.1.0</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <groupId>com.weijin.recruitment</groupId>
+    <artifactId>online-recruitment-system</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>online-recruitment-system</name>
+    <description>online-recruitment-system</description>
 
-	<properties>
-		<java.version>17</java.version>
+    <properties>
+        <java.version>17</java.version>
         <!-- 自定义管理版本号 -->
         <druid.version>1.2.20</druid.version>
         <lombok.version>1.18.30</lombok.version>
@@ -24,9 +24,9 @@
         <java-jwt>4.3.0</java-jwt>
         <mapstruct.version>1.5.5.Final</mapstruct.version>
         <lombok-mapstruct-binding.version>0.2.0</lombok-mapstruct-binding.version>
-	</properties>
-	<dependencies>
-<!--        转换器-->
+    </properties>
+    <dependencies>
+        <!--        转换器-->
         <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct-processor</artifactId>
@@ -43,32 +43,39 @@
             <version>${lombok-mapstruct-binding.version}</version>
             <scope>provided</scope>
         </dependency>
-<!--        校验器-->
+        <!--        校验器-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
+
+        <!--时间日期处理-->
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <version>2.13.0</version>
+        </dependency>
         <!--excel处理-->
-<!--        <dependency>-->
-<!--            <groupId>com.alibaba</groupId>-->
-<!--            <artifactId>easyexcel</artifactId>-->
-<!--            <version>3.3.4</version>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>org.apache.poi</groupId>-->
-<!--            <artifactId>poi-ooxml</artifactId>-->
-<!--            <version>3.16</version>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>com.alibaba</groupId>-->
-<!--            <artifactId>fastjson</artifactId>-->
-<!--            <version>1.2.41</version>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>org.mapstruct</groupId>-->
-<!--            <artifactId>mapstruct</artifactId>-->
-<!--            <version>${mapstruct.version}</version>-->
-<!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>com.alibaba</groupId>-->
+        <!--            <artifactId>easyexcel</artifactId>-->
+        <!--            <version>3.3.4</version>-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.apache.poi</groupId>-->
+        <!--            <artifactId>poi-ooxml</artifactId>-->
+        <!--            <version>3.16</version>-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>com.alibaba</groupId>-->
+        <!--            <artifactId>fastjson</artifactId>-->
+        <!--            <version>1.2.41</version>-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.mapstruct</groupId>-->
+        <!--            <artifactId>mapstruct</artifactId>-->
+        <!--            <version>${mapstruct.version}</version>-->
+        <!--        </dependency>-->
         <!-- 标记当前项目为web项目 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -92,11 +99,11 @@
             <version>${mybatis-plus.version}</version>
         </dependency>
         <!-- 阿里巴巴数据库连接池 -->
-<!--        <dependency>-->
-<!--            <groupId>com.alibaba</groupId>-->
-<!--            <artifactId>druid-spring-boot-3-starter</artifactId>-->
-<!--            <version>${druid.version}</version>-->
-<!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>com.alibaba</groupId>-->
+        <!--            <artifactId>druid-spring-boot-3-starter</artifactId>-->
+        <!--            <version>${druid.version}</version>-->
+        <!--        </dependency>-->
         <!-- mysql 驱动 -->
         <dependency>
             <groupId>mysql</groupId>
@@ -104,19 +111,19 @@
             <version>${mysql-connector}</version>
             <scope>runtime</scope>
         </dependency>
-<!--        spring security-->
+        <!--        spring security-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
         <!--devtools热部署-->
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.boot</groupId>-->
-<!--            <artifactId>spring-boot-devtools</artifactId>-->
-<!--            <optional>true</optional>-->
-<!--            <scope>true</scope>-->
-<!--        </dependency>-->
-<!--        redis-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.springframework.boot</groupId>-->
+        <!--            <artifactId>spring-boot-devtools</artifactId>-->
+        <!--            <optional>true</optional>-->
+        <!--            <scope>true</scope>-->
+        <!--        </dependency>-->
+        <!--        redis-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
@@ -126,7 +133,7 @@
             <artifactId>java-jwt</artifactId>
             <version>${java-jwt}</version>
         </dependency>
-<!--        hutool 工具-->
+        <!--        hutool 工具-->
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
@@ -138,11 +145,11 @@
         <!--    <version>5.8.23</version>-->
         <!--</dependency>-->
         <!-- aop切面 -->
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.boot</groupId>-->
-<!--            <artifactId>spring-boot-starter-aop</artifactId>-->
-<!--        </dependency>-->
-<!--        阿里云oss-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.springframework.boot</groupId>-->
+        <!--            <artifactId>spring-boot-starter-aop</artifactId>-->
+        <!--        </dependency>-->
+        <!--        阿里云oss-->
         <dependency>
             <groupId>com.aliyun.oss</groupId>
             <artifactId>aliyun-sdk-oss</artifactId>
@@ -154,45 +161,44 @@
         <!--</dependency>-->
 
         <!--密码解密-->
-<!--        <dependency>-->
-<!--            <groupId>org.bouncycastle</groupId>-->
-<!--            <artifactId>bcprov-jdk15on</artifactId>-->
-<!--            <version>1.60</version>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.boot</groupId>-->
-<!--            <artifactId>spring-boot-starter-web</artifactId>-->
-<!--            <version>2.5.12</version>-->
-<!--            <scope>compile</scope>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>com.alibaba.fastjson2</groupId>-->
-<!--            <artifactId>fastjson2</artifactId>-->
-<!--            <version>2.0.23</version>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>org.apache.commons</groupId>-->
-<!--            <artifactId>commons-lang3</artifactId>-->
-<!--            <version>3.12.0</version> &lt;!&ndash; 请检查最新版本并替换 &ndash;&gt;-->
-<!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.bouncycastle</groupId>-->
+        <!--            <artifactId>bcprov-jdk15on</artifactId>-->
+        <!--            <version>1.60</version>-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.springframework.boot</groupId>-->
+        <!--            <artifactId>spring-boot-starter-web</artifactId>-->
+        <!--            <version>2.5.12</version>-->
+        <!--            <scope>compile</scope>-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>com.alibaba.fastjson2</groupId>-->
+        <!--            <artifactId>fastjson2</artifactId>-->
+        <!--            <version>2.0.23</version>-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.apache.commons</groupId>-->
+        <!--            <artifactId>commons-lang3</artifactId>-->
+        <!--            <version>3.12.0</version> &lt;!&ndash; 请检查最新版本并替换 &ndash;&gt;-->
+        <!--        </dependency>-->
         <!-- sharding-jdbc -->
-<!--        <dependency>-->
-<!--            <groupId>org.apache.shardingsphere</groupId>-->
-<!--            <artifactId>shardingsphere-jdbc</artifactId>-->
-<!--            <version>5.5.0</version>-->
-<!--            <exclusions>-->
-<!--                <exclusion>-->
-<!--                    <groupId>org.apache.shardingsphere</groupId>-->
-<!--                    <artifactId>shardingsphere-test-util</artifactId>-->
-<!--                </exclusion>-->
-<!--            </exclusions>-->
-<!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.apache.shardingsphere</groupId>-->
+        <!--            <artifactId>shardingsphere-jdbc</artifactId>-->
+        <!--            <version>5.5.0</version>-->
+        <!--            <exclusions>-->
+        <!--                <exclusion>-->
+        <!--                    <groupId>org.apache.shardingsphere</groupId>-->
+        <!--                    <artifactId>shardingsphere-test-util</artifactId>-->
+        <!--                </exclusion>-->
+        <!--            </exclusions>-->
+        <!--        </dependency>-->
         <!-- Spring Session Redis 依赖-->
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.session</groupId>-->
-<!--            <artifactId>spring-session-data-redis</artifactId>-->
-<!--        </dependency>-->
-
+        <!--        <dependency>-->
+        <!--            <groupId>org.springframework.session</groupId>-->
+        <!--            <artifactId>spring-session-data-redis</artifactId>-->
+        <!--        </dependency>-->
 
 
         <!-- mybatis-plus-generator -->
@@ -218,15 +224,15 @@
             <artifactId>mybatis-plus-generator</artifactId>
             <version>3.5.7</version>
         </dependency>
-	</dependencies>
+    </dependencies>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

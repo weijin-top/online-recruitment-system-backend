@@ -1,6 +1,6 @@
 package com.weijin.recruitment.service;
 
-import com.weijin.recruitment.model.entity.Practice;
+import com.weijin.recruitment.model.entity.Job;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author WeiJin
  * @since 2024-06-30
  */
-public interface IPracticeService extends IService<Practice> {
+public interface IJobService extends IService<Job> {
 
 }

@@ -5,11 +5,11 @@ import lombok.Data;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.YearMonth;
 
 /**
  * <p>
- *      项目经历实体
+ * 项目经历实体
  * </p>
  *
  * @author WeiJin
@@ -30,9 +30,9 @@ public class Project implements Serializable {
 
     private String projectName;
 
-    private LocalDateTime startTime;
+    private YearMonth startTime;
 
-    private LocalDateTime endTime;
+    private YearMonth endTime;
 
     /**
      * 项目内容
@@ -45,13 +45,13 @@ public class Project implements Serializable {
     @Override
     public String toString() {
         return "Project{" +
-            "id = " + id +
-            ", userId = " + userId +
-            ", projectName = " + projectName +
-            ", startTime = " + startTime +
-            ", endTime = " + endTime +
-            ", content = " + content +
-            ", isDeleted = " + isDeleted +
-        "}";
+                "id = " + id +
+                ", userId = " + userId +
+                ", projectName = " + projectName +
+                ", startTime = " + startTime +
+                ", endTime = " + endTime +
+                ", content = " + content +
+                ", isDeleted = " + isDeleted +
+                "}";
     }
 }

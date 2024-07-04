@@ -67,12 +67,12 @@ public class CompanyController {
      */
     @GetMapping("/companies")
     @PreAuthorize("hasAnyRole('admin')")
-    public Result<IPage<CompanyVO>> getCompanies(@RequestParam(value = "pageNum", required = false, defaultValue = "1") Integer pageNum,
+    public Result<IPage<CompanyVO>> queryCompanies(@RequestParam(value = "pageNum", required = false, defaultValue = "1") Integer pageNum,
                                                  @RequestParam(value = "pageSize", required = false, defaultValue = "20") Integer pageSize,
                                                  @Min(value = 0, message = "审核状态只能是0-2")
                                                  @Max(value = 2, message = "审核状态只能是0-2")
                                                  @RequestParam(value = "status", required = false) Integer status) {
-        return iCompanyService.getCompanies(pageNum, pageSize, status);
+        return iCompanyService.queryCompanies(pageNum, pageSize, status);
     }
 
     /**
@@ -84,8 +84,8 @@ public class CompanyController {
      */
     @GetMapping("/single")
     @PreAuthorize("hasAnyRole('recruiter','admin')")
-    public Result<CompanyVO> getSingle(@RequestParam(value = "id", required = false) Integer id) {
-        return iCompanyService.getSingle(id);
+    public Result<CompanyVO> querySingle(@RequestParam(value = "id", required = false) Integer id) {
+        return iCompanyService.querySingle(id);
     }
 
 }

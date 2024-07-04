@@ -2,6 +2,7 @@ package com.weijin.recruitment.converter;
 
 import com.weijin.recruitment.model.entity.Info;
 import com.weijin.recruitment.model.from.info.InfoFrom;
+import com.weijin.recruitment.model.vo.info.InfoVO;
 import org.mapstruct.Mapper;
 import org.springframework.stereotype.Component;
 
@@ -15,4 +16,6 @@ import org.springframework.stereotype.Component;
 public interface InfoConverter {
 
     Info fromToEntity(InfoFrom infoFrom);
+
+    InfoVO entityToVO(Info info);
 }

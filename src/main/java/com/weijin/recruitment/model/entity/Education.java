@@ -6,10 +6,11 @@ import lombok.Data;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.time.YearMonth;
 
 /**
  * <p>
- *      学历实体
+ * 学历实体
  * </p>
  *
  * @author WeiJin
@@ -38,11 +39,11 @@ public class Education implements Serializable {
     /**
      * 学历,1小学2初中3中专4高中5大专6本科7研究生
      */
-    private Integer education;
+    private Integer level;
 
-    private LocalDateTime startTime;
+    private YearMonth startTime;
 
-    private LocalDateTime endTime;
+    private YearMonth endTime;
 
     /**
      * 描述
@@ -53,19 +54,18 @@ public class Education implements Serializable {
     private Integer isDeleted;
 
 
-
     @Override
     public String toString() {
         return "Education{" +
-            "id = " + id +
-            ", userId = " + userId +
-            ", schoolName = " + schoolName +
-            ", major = " + major +
-            ", education = " + education +
-            ", startTime = " + startTime +
-            ", endTime = " + endTime +
-            ", description = " + description +
-            ", isDeleted = " + isDeleted +
-        "}";
+                "id = " + id +
+                ", userId = " + userId +
+                ", schoolName = " + schoolName +
+                ", major = " + major +
+                ", level = " + level +
+                ", startTime = " + startTime +
+                ", endTime = " + endTime +
+                ", description = " + description +
+                ", isDeleted = " + isDeleted +
+                "}";
     }
 }

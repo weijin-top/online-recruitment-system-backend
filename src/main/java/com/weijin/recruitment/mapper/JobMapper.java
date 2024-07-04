@@ -1,6 +1,6 @@
 package com.weijin.recruitment.mapper;
 
-import com.weijin.recruitment.model.entity.Practice;
+import com.weijin.recruitment.model.entity.Job;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author WeiJin
  * @since 2024-06-30
  */
-public interface PracticeMapper extends BaseMapper<Practice> {
+public interface JobMapper extends BaseMapper<Job> {
 
 }

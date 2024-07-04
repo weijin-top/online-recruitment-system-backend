@@ -29,5 +29,5 @@ public interface IPostService extends IService<Post> {
      * 获取岗位类别
      * @return 响应结果
      */
-    Result<List<PostVO>> getPosts();
+    Result<List<PostVO>> queryPosts();
 }

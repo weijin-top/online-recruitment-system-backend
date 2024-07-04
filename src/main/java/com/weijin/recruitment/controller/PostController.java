@@ -41,7 +41,7 @@ public class PostController {
      */
     @GetMapping
     @PreAuthorize("hasAnyRole('seeker','recruiter','admin')")
-    public Result<List<PostVO>> getPosts(){
-        return iPostService.getPosts();
+    public Result<List<PostVO>> queryPosts(){
+        return iPostService.queryPosts();
     }
 }

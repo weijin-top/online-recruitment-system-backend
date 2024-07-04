@@ -42,7 +42,7 @@ public interface ICompanyService extends IService<Company> {
      * @param status   公司审核状态
      * @return 响应
      */
-    Result<IPage<CompanyVO>> getCompanies(Integer pageNum, Integer pageSize, Integer status);
+    Result<IPage<CompanyVO>> queryCompanies(Integer pageNum, Integer pageSize, Integer status);
 
     /**
      * 获取单个公司信息
@@ -50,6 +50,6 @@ public interface ICompanyService extends IService<Company> {
      * @param id 公司id
      * @return 响应
      */
-    Result<CompanyVO> getSingle(Integer id);
+    Result<CompanyVO> querySingle(Integer id);
 
 }

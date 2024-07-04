@@ -35,8 +35,8 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements IP
     }
 
     @Override
-    public Result<List<PostVO>> getPosts() {
+    public Result<List<PostVO>> queryPosts() {
         List<PostVO> postVOS = baseMapper.selectParentPosts();
-        return Result.success("查询成功",postVOS);
+        return Result.success("查询成功", postVOS);
     }
 }

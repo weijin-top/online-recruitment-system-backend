@@ -1,15 +1,15 @@
 package com.weijin.recruitment.controller;
 
+import com.weijin.recruitment.group.InfoGroup;
+import com.weijin.recruitment.model.entity.Info;
 import com.weijin.recruitment.model.from.info.InfoFrom;
 import com.weijin.recruitment.model.result.Result;
+import com.weijin.recruitment.model.vo.info.InfoVO;
 import com.weijin.recruitment.service.IInfoService;
 import jakarta.annotation.Resource;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 个人信息管理
@@ -33,9 +33,31 @@ public class InfoController {
      */
     @PostMapping
     @PreAuthorize("hasAnyRole('seeker')")
-    public Result<String> saveInfo(@Validated @RequestBody InfoFrom infoFrom) {
+    public Result<String> saveInfo(@Validated(InfoGroup.SaveInfoGroup.class) @RequestBody InfoFrom infoFrom) {
         return iInfoService.saveInfo(infoFrom);
     }
 
+    /**
+     * 修改个人基本信息
+     *
+     * @param infoFrom 入参
+     * @return 响应
+     */
+    @PutMapping
+    @PreAuthorize("hasAnyRole('seeker')")
+    public Result<String> modifyInfo(@Validated(InfoGroup.ModifyInfoGroup.class) @RequestBody InfoFrom infoFrom) {
+        return iInfoService.modifyInfo(infoFrom);
+    }
+
+    /**
+     * 获取个人基本信息
+     *
+     * @return 响应
+     */
+    @GetMapping
+    @PreAuthorize("hasAnyRole('seeker')")
+    public Result<InfoVO> queryInfo() {
+        return iInfoService.queryInfo();
+    }
 
 }

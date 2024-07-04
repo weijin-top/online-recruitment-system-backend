@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.weijin.recruitment.model.entity.Info;
 import com.weijin.recruitment.model.from.info.InfoFrom;
 import com.weijin.recruitment.model.result.Result;
+import com.weijin.recruitment.model.vo.info.InfoVO;
 
 /**
  * @Author WeiJin
@@ -19,4 +20,20 @@ public interface IInfoService extends IService<Info> {
      * @return 响应
      */
     Result<String> saveInfo(InfoFrom infoFrom);
+
+    /**
+     * 修改个人基本信息
+     *
+     * @param infoFrom 入参
+     * @return 响应
+     */
+    Result<String> modifyInfo(InfoFrom infoFrom);
+
+    /**
+     * 获取个人基本信息
+     *
+     * @return 响应
+     */
+    Result<InfoVO> queryInfo();
+
 }

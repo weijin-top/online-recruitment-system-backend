@@ -5,19 +5,19 @@ import lombok.Data;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.YearMonth;
 
 /**
  * <p>
- *      实习经历实体
+ * 实习经历实体
  * </p>
  *
  * @author WeiJin
  * @since 2024-06-30
  */
-@TableName("t_practice")
+@TableName("t_job")
 @Data
-public class Practice implements Serializable {
+public class Job implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
@@ -38,9 +38,10 @@ public class Practice implements Serializable {
      */
     private String position;
 
-    private LocalDateTime startTime;
 
-    private LocalDateTime endTime;
+    private YearMonth startTime;
+
+    private YearMonth endTime;
 
     /**
      * 工作内容
@@ -53,14 +54,14 @@ public class Practice implements Serializable {
     @Override
     public String toString() {
         return "Practice{" +
-            "id = " + id +
-            ", userId = " + userId +
-            ", companyName = " + companyName +
-            ", position = " + position +
-            ", startTime = " + startTime +
-            ", endTime = " + endTime +
-            ", content = " + content +
-            ", isDeleted = " + isDeleted +
-        "}";
+                "id = " + id +
+                ", userId = " + userId +
+                ", companyName = " + companyName +
+                ", position = " + position +
+                ", startTime = " + startTime +
+                ", endTime = " + endTime +
+                ", content = " + content +
+                ", isDeleted = " + isDeleted +
+                "}";
     }
 }
