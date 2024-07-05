@@ -38,6 +38,7 @@ public class Project implements Serializable {
      * 项目内容
      */
     private String content;
+
     @TableLogic(value = "0", delval = "1")
     private Integer isDeleted;
 

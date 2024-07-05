@@ -47,6 +47,7 @@ public class Job implements Serializable {
      * 工作内容
      */
     private String content;
+
     @TableLogic(value = "0", delval = "1")
     private Integer isDeleted;
 
