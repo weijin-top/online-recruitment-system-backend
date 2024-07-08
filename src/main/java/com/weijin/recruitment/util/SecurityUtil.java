@@ -7,6 +7,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @Author WeiJin
@@ -29,7 +30,7 @@ public class SecurityUtil {
                 .getContext()
                 .getAuthentication()
                 .getPrincipal());
-        return user != null ? user.getUser().getId() : null;
+        return Objects.nonNull(user) ? user.getUser().getId() : null;
     }
 
     /**
@@ -48,5 +49,17 @@ public class SecurityUtil {
         return !list.isEmpty() ? list.get(0).toString() : null;
     }
 
+    /**
+     * 获取招聘者的公司id
+     *
+     * @return 公司id
+     */
+    public static Integer getCompanyId() {
+        SecurityUserDetails user = (SecurityUserDetails) (SecurityContextHolder
+                .getContext()
+                .getAuthentication()
+                .getPrincipal());
+        return Objects.nonNull(user) ? user.getCompanyId() : null;
+    }
 
 }

@@ -1,9 +1,6 @@
 package com.weijin.recruitment.model.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableLogic;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
 
 import java.io.Serial;
@@ -38,7 +35,7 @@ public class Position implements Serializable {
     /**
      * 职位类型
      */
-    private String type;
+    private Integer type;
 
     /**
      * 招聘人数
@@ -72,6 +69,7 @@ public class Position implements Serializable {
     /**
      * 创建时间
      */
+    @TableField(fill = FieldFill.INSERT)
     private LocalDateTime createTime;
 
     @TableLogic(value = "0", delval = "1")

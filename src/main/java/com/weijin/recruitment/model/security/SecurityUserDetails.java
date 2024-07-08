@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * Spring Security 用户对象
  *
- * @author haoxr
+ * @author WeiJin
  * @since 3.0.0
  */
 @Data
@@ -26,6 +26,7 @@ public class SecurityUserDetails implements UserDetails {
     private List<GrantedAuthority> permissions;
     private User user;
     private String username;
+    private Integer companyId;
 
     public SecurityUserDetails(User user) {
         this.user = user;

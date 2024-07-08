@@ -80,12 +80,12 @@ public class VerifyTokenFilter extends OncePerRequestFilter {
         String userInfo = jwtUtil.getUser(authorization);
 //        List<String> authList = jwtUtil.getAuthList(authorization);
         // 反序列化jwtToken获取用户信息
-        User sysUser = objectMapper.readValue(userInfo, User.class);
+        User user = objectMapper.readValue(userInfo, User.class);
         // 权限转型
         List<GrantedAuthority> permissions = AuthorityUtils
-                .commaSeparatedStringToAuthorityList(RoleEnum.getRole(sysUser.getRoleId()));
+                .commaSeparatedStringToAuthorityList(RoleEnum.getRole(user.getRoleId()));
         // 创建登录用户
-        SecurityUserDetails securityUser = new SecurityUserDetails(sysUser);
+        SecurityUserDetails securityUser = new SecurityUserDetails(user);
         securityUser.setPermissions(permissions);
         // 创建权限授权的token 参数：用户，密码，权限 不给密码因为已经登录了
         UsernamePasswordAuthenticationToken token =
