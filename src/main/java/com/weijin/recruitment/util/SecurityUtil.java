@@ -49,17 +49,5 @@ public class SecurityUtil {
         return !list.isEmpty() ? list.get(0).toString() : null;
     }
 
-    /**
-     * 获取招聘者的公司id
-     *
-     * @return 公司id
-     */
-    public static Integer getCompanyId() {
-        SecurityUserDetails user = (SecurityUserDetails) (SecurityContextHolder
-                .getContext()
-                .getAuthentication()
-                .getPrincipal());
-        return Objects.nonNull(user) ? user.getCompanyId() : null;
-    }
 
 }

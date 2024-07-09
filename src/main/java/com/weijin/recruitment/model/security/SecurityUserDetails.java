@@ -26,7 +26,6 @@ public class SecurityUserDetails implements UserDetails {
     private List<GrantedAuthority> permissions;
     private User user;
     private String username;
-    private Integer companyId;
 
     public SecurityUserDetails(User user) {
         this.user = user;

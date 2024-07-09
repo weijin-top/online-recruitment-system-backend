@@ -2,4 +2,56 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.weijin.recruitment.mapper.PositionMapper">
 
+    <select id="selectPositionDetailById"
+            resultType="com.weijin.recruitment.model.vo.position.PositionDetailVO">
+        select ps.id,
+               ps.name,
+               ps.number,
+               ps.mini_salary,
+               ps.max_salary,
+               ps.job_place,
+               ps.education,
+               ps.job_require,
+               ps.create_time,
+               ps.status,
+               p.name as postName,
+               c.name as companyName,
+               c.address,
+               c.logo,
+               c.intro
+        from t_position as ps
+                 left join t_post as p on ps.type = p.id
+                 left join t_company as c on ps.company_id = c.id
+        where ps.id = #{id}
+          and ps.is_deleted = 0
+    </select>
+    <select id="pagePosition" resultType="com.weijin.recruitment.model.vo.position.PositionSimpleVO">
+        select ps.id,
+        ps.name,
+        ps.mini_salary,
+        ps.max_salary,
+        ps.education,
+        ps.job_place,
+        c.name as companyName,
+        c.logo,
+        p.name as postName
+        from t_position as ps
+        left join t_post as p on ps.type = p.id
+        left join t_company as c on ps.company_id = c.id
+        <trim prefixOverrides="and" prefix="where">
+            <if test='edu != null'>
+                ps.education = #{edu}
+            </if>
+            <if test='address != null and address != ""'>
+                and ps.job_place like concat('%',#{address},'%')
+            </if>
+            <if test='type != null'>
+                and ps.type = #{type}
+            </if>
+            <if test='name != null and name != ""'>
+                and ps.name like concat('%',#{name},'%') or c.name like concat('%',#{name},'%')
+            </if>
+            and ps.is_deleted = 0
+        </trim>
+    </select>
 </mapper>

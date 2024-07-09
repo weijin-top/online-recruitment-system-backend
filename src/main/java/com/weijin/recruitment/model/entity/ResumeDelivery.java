@@ -31,7 +31,7 @@ public class ResumeDelivery implements Serializable {
     private Integer postionId;
 
     /**
-     * 投递状态 0未查看1感兴趣2已拒绝3邀面试
+     * 投递状态 0未查看1已查看2感兴趣3已拒绝4邀面试
      */
     private Integer status;
 

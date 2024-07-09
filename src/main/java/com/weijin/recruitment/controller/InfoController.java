@@ -1,8 +1,8 @@
 package com.weijin.recruitment.controller;
 
 import com.weijin.recruitment.group.InfoGroup;
-import com.weijin.recruitment.model.entity.Info;
 import com.weijin.recruitment.model.from.info.InfoFrom;
+import com.weijin.recruitment.model.vo.info.ResumeVO;
 import com.weijin.recruitment.model.result.Result;
 import com.weijin.recruitment.model.vo.info.InfoVO;
 import com.weijin.recruitment.service.IInfoService;
@@ -60,4 +60,16 @@ public class InfoController {
         return iInfoService.queryInfo();
     }
 
+
+    /**
+     * 根据用户id获取简历
+     *
+     * @param userId 用户信息
+     * @return 响应
+     */
+    @GetMapping("/resume/{userId}")
+    @PreAuthorize("hasAnyRole('seeker','recruiter')")
+    public Result<ResumeVO> queryResume(@PathVariable("userId") Integer userId) {
+        return iInfoService.queryResume(userId);
+    }
 }

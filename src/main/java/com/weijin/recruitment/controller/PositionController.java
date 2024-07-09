@@ -1,8 +1,11 @@
 package com.weijin.recruitment.controller;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.weijin.recruitment.group.PositionGroup;
 import com.weijin.recruitment.model.from.position.PositionFrom;
 import com.weijin.recruitment.model.result.Result;
+import com.weijin.recruitment.model.vo.position.PositionDetailVO;
+import com.weijin.recruitment.model.vo.position.PositionSimpleVO;
 import com.weijin.recruitment.service.IPositionService;
 import com.weijin.recruitment.service.IPostService;
 import jakarta.annotation.Resource;
@@ -35,7 +38,7 @@ public class PositionController {
      */
     @PostMapping
     @PreAuthorize("hasAnyRole('recruiter')")
-    public Result<String> savePosition(@Validated(PositionGroup.SavePositionGroup.class) PositionFrom positionFrom) {
+    public Result<String> savePosition(@Validated(PositionGroup.SavePositionGroup.class) @RequestBody PositionFrom positionFrom) {
         return iPositionService.savePosition(positionFrom);
     }
 
@@ -47,13 +50,14 @@ public class PositionController {
      */
     @PutMapping
     @PreAuthorize("hasAnyRole('recruiter')")
-    public Result<String> modifyPosition(@Validated(PositionGroup.ModifyPositionGroup.class) PositionFrom positionFrom) {
+    public Result<String> modifyPosition(@Validated(PositionGroup.ModifyPositionGroup.class) @RequestBody PositionFrom positionFrom) {
         return iPositionService.modifyPosition(positionFrom);
     }
 
     /**
      * 审核职位
-     * @param id 职位id
+     *
+     * @param id     职位id
      * @param status 状态 1通过2不通过3下架
      * @return 响应
      */
@@ -63,7 +67,54 @@ public class PositionController {
                                         @Min(value = 1, message = "审核状态只能是1-3")
                                         @Max(value = 3, message = "审核状态只能是1-3")
                                         @PathVariable("status") Integer status) {
-        return iPositionService.auditPosition(id,status);
+        return iPositionService.auditPosition(id, status);
     }
 
+    /**
+     * 停止招聘
+     * 用于招聘者下架该职位
+     *
+     * @param id 职位id
+     * @return 响应
+     */
+    @PutMapping("/{id}")
+    @PreAuthorize("hasAnyRole('recruiter')")
+    public Result<String> cancelPosition(@PathVariable("id") Integer id) {
+        return iPositionService.cancelPosition(id);
+    }
+
+    /**
+     * 获取职位详情
+     *
+     * @param id 职位id
+     * @return 响应
+     */
+    @GetMapping("/{id}")
+    @PreAuthorize("hasAnyRole('seeker','recruiter','admin')")
+    public Result<PositionDetailVO> querySinge(@PathVariable("id") Integer id) {
+        return iPositionService.querySinge(id);
+    }
+
+    /**
+     * 分页获取职位
+     *
+     * @param pageNum  页码
+     * @param pageSize 每页记录数
+     * @param edu      学历要求
+     * @param address  工作地点
+     * @param type     职位类别
+     * @param name     职位名称或公司名称
+     * @return 响应
+     */
+    @GetMapping("/page")
+    @PreAuthorize("hasAnyRole('seeker','recruiter','admin')")
+    public Result<IPage<PositionSimpleVO>> pagePosition(
+            @RequestParam(value = "pageNum", required = false, defaultValue = "1") Integer pageNum,
+            @RequestParam(value = "pageSize", required = false, defaultValue = "20") Integer pageSize,
+            @RequestParam(value = "edu", required = false) Integer edu,
+            @RequestParam(value = "address", required = false) String address,
+            @RequestParam(value = "type", required = false) Integer type,
+            @RequestParam(value = "name", required = false) String name) {
+        return iPositionService.pagePosition(pageNum,pageSize,edu,address,type,name);
+    }
 }

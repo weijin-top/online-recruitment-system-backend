@@ -52,8 +52,6 @@ public class AuthServiceImpl implements IAuthService {
     private ObjectMapper objectMapper;
     @Resource
     private UserConverter userConverter;
-    @Resource
-    private CompanyMapper companyMapper;
 
 
     @SneakyThrows(JsonProcessingException.class)
@@ -85,13 +83,6 @@ public class AuthServiceImpl implements IAuthService {
         SecurityUserDetails sysUserDetails = new SecurityUserDetails(user);
         // 把转型后的权限放进sysUserDetails对象
         sysUserDetails.setPermissions(userPermissions);
-        //如果是招聘者登录，把它的公司id保存到Security的上下文中
-        if (user.getRoleId() == 2) {
-            LambdaQueryWrapper<Company> companyLambdaQueryWrapper = new LambdaQueryWrapper<Company>()
-                    .eq(Company::getUserId, user.getId());
-            Company company = companyMapper.selectOne(companyLambdaQueryWrapper);
-            sysUserDetails.setCompanyId(Objects.nonNull(company) ? company.getId() : null);
-        }
         // 将用户信息转为字符串
         String userInfo = objectMapper.writeValueAsString(user);
         String token = jwtUtil.createJwt(userInfo, userPermissions.stream().map(String::valueOf).toList());

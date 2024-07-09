@@ -5,6 +5,7 @@ import com.weijin.recruitment.model.entity.Info;
 import com.weijin.recruitment.model.from.info.InfoFrom;
 import com.weijin.recruitment.model.result.Result;
 import com.weijin.recruitment.model.vo.info.InfoVO;
+import com.weijin.recruitment.model.vo.info.ResumeVO;
 
 /**
  * @Author WeiJin
@@ -35,5 +36,13 @@ public interface IInfoService extends IService<Info> {
      * @return 响应
      */
     Result<InfoVO> queryInfo();
+
+    /**
+     * 根据用户id获取简历
+     *
+     * @param userId 用户信息
+     * @return 响应
+     */
+    Result<ResumeVO> queryResume(Integer userId);
 
 }
