@@ -28,7 +28,7 @@ public class ResumeDelivery implements Serializable {
     @TableField(fill = FieldFill.INSERT)
     private Integer userId;
 
-    private Integer postionId;
+    private Integer positionId;
 
     /**
      * 投递状态 0未查看1已查看2感兴趣3已拒绝4邀面试
@@ -43,6 +43,7 @@ public class ResumeDelivery implements Serializable {
     /**
      * 投递日期
      */
+    @TableField(fill = FieldFill.INSERT)
     private LocalDateTime createTime;
 
     @TableLogic(value = "0", delval = "1")
@@ -54,7 +55,7 @@ public class ResumeDelivery implements Serializable {
         return "ResumeDelivery{" +
             "id = " + id +
             ", userId = " + userId +
-            ", postionId = " + postionId +
+            ", positionId = " + positionId +
             ", status = " + status +
             ", remark = " + remark +
             ", createTime = " + createTime +

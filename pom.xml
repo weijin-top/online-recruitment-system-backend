@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.weijin.recruitment</groupId>
-    <artifactId>online-recruitment-system</artifactId>
+    <artifactId>online-recruitment-system-backend</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>online-recruitment-system</name>
     <description>online-recruitment-system</description>

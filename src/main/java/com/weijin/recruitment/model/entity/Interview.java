@@ -25,10 +25,10 @@ public class Interview implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
-    @TableField(fill = FieldFill.INSERT)
-    private Integer userId;
 
-    private Integer positionId;
+    private Integer rdId;
+
+
 
     /**
      * 面试时间
@@ -63,8 +63,7 @@ public class Interview implements Serializable {
     public String toString() {
         return "Interview{" +
                 "id = " + id +
-                ", userId = " + userId +
-                ", positionId = " + positionId +
+                ", rdId = " + rdId +
                 ", time = " + time +
                 ", address = " + address +
                 ", interviewRemark = " + interviewRemark +
