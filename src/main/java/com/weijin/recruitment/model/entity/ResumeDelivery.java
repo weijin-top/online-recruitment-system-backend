@@ -36,11 +36,6 @@ public class ResumeDelivery implements Serializable {
     private Integer status;
 
     /**
-     * 投递反馈
-     */
-    private String remark;
-
-    /**
      * 投递日期
      */
     @TableField(fill = FieldFill.INSERT)
@@ -57,7 +52,6 @@ public class ResumeDelivery implements Serializable {
             ", userId = " + userId +
             ", positionId = " + positionId +
             ", status = " + status +
-            ", remark = " + remark +
             ", createTime = " + createTime +
             ", isDeleted = " + isDeleted +
         "}";
