@@ -1,23 +1,17 @@
 package com.weijin.recruitment.model.from.user;
 
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 /**
  * @Author WeiJin
  * @Version 1.0
- * @Date 2024/7/3 15:31
+ * @Date 2024/9/10 21:26
  */
 @Data
 public class UserFrom {
-    @NotBlank(message = "用户名不能为空")
+    @NotNull(message = "用户id不能为空")
+    private Integer id;
     private String username;
-    @NotBlank(message = "密码不能为空")
-    private String password;
-    @Min(value = 1,message = "角色只能是1或2")
-    @Max(value = 2,message = "角色只能是1或2")
-    private Integer roleId;
-
+    private String avatar;
 }

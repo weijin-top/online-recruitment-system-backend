@@ -1,8 +1,9 @@
 package com.weijin.recruitment.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.weijin.recruitment.group.companyGroup;
 import com.weijin.recruitment.model.from.company.CompanyFrom;
-import com.weijin.recruitment.model.result.Result;
+import com.weijin.recruitment.common.Result;
 import com.weijin.recruitment.model.vo.company.CompanyVO;
 import com.weijin.recruitment.service.ICompanyService;
 import jakarta.annotation.Resource;
@@ -11,8 +12,6 @@ import jakarta.validation.constraints.Min;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 /**
  * 公司管理
@@ -31,12 +30,26 @@ public class CompanyController {
      * 添加公司
      *
      * @param companyFrom 入参
-     * @return 相应
+     * @return 响应
      */
     @PostMapping
     @PreAuthorize("hasAnyRole('recruiter')")
-    public Result<String> saveCompany(@Validated @RequestBody CompanyFrom companyFrom) {
+    public Result<String> saveCompany(@Validated(companyGroup.SaveCompanyGroup.class) @RequestBody
+                                      CompanyFrom companyFrom) {
         return iCompanyService.saveCompany(companyFrom);
+    }
+
+    /**
+     * 修改公司信息
+     *
+     * @param companyFrom 入参
+     * @return 响应
+     */
+    @PutMapping
+    @PreAuthorize("hasAnyRole('recruiter')")
+    public Result<String> modifyCompany(@Validated(companyGroup.ModifyCompanyGroup.class) @RequestBody
+                                        CompanyFrom companyFrom) {
+        return iCompanyService.modifyCompany(companyFrom);
     }
 
 
@@ -63,16 +76,16 @@ public class CompanyController {
      * @param pageNum  页码
      * @param pageSize 每页记录数
      * @param status   公司审核状态
+     * @param name     公司名称
      * @return 响应
      */
     @GetMapping("/companies")
     @PreAuthorize("hasAnyRole('admin')")
     public Result<IPage<CompanyVO>> queryCompanies(@RequestParam(value = "pageNum", required = false, defaultValue = "1") Integer pageNum,
-                                                 @RequestParam(value = "pageSize", required = false, defaultValue = "20") Integer pageSize,
-                                                 @Min(value = 0, message = "审核状态只能是0-2")
-                                                 @Max(value = 2, message = "审核状态只能是0-2")
-                                                 @RequestParam(value = "status", required = false) Integer status) {
-        return iCompanyService.queryCompanies(pageNum, pageSize, status);
+                                                   @RequestParam(value = "pageSize", required = false, defaultValue = "20") Integer pageSize,
+                                                   @RequestParam(value = "status", required = false) Integer status,
+                                                   @RequestParam(value = "name", required = false) String name) {
+        return iCompanyService.queryCompanies(pageNum, pageSize, status, name);
     }
 
     /**

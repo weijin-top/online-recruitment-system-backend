@@ -2,6 +2,7 @@ package com.weijin.recruitment.converter;
 
 import com.weijin.recruitment.model.entity.Position;
 import com.weijin.recruitment.model.from.position.PositionFrom;
+import com.weijin.recruitment.model.vo.position.PositionVO;
 import org.mapstruct.Mapper;
 import org.springframework.stereotype.Component;
 
@@ -14,4 +15,6 @@ import org.springframework.stereotype.Component;
 @Mapper(componentModel = "spring")
 public interface PositionConverter {
     Position fromToEntity(PositionFrom positionFrom);
+
+    PositionVO entityToVO(Position position);
 }

@@ -3,7 +3,7 @@ package com.weijin.recruitment.service;
 import com.weijin.recruitment.model.entity.Job;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.weijin.recruitment.model.from.job.JobFrom;
-import com.weijin.recruitment.model.result.Result;
+import com.weijin.recruitment.common.Result;
 import com.weijin.recruitment.model.vo.job.JobVO;
 
 import java.util.List;

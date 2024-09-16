@@ -1,16 +1,18 @@
 package com.weijin.recruitment.controller;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
-import com.weijin.recruitment.model.result.Result;
+import com.weijin.recruitment.common.Result;
 import com.weijin.recruitment.model.vo.info.ResumeVO;
+import com.weijin.recruitment.model.vo.count.DeliveryCountVO;
+import com.weijin.recruitment.model.vo.resumedelivery.DeliveryInfoVO;
+import com.weijin.recruitment.model.vo.resumedelivery.ResumeDeliveryInfoVO;
 import com.weijin.recruitment.service.IInfoService;
 import com.weijin.recruitment.service.IResumeDeliveryService;
 import com.weijin.recruitment.util.SecurityUtil;
 import jakarta.annotation.Resource;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Objects;
@@ -23,6 +25,7 @@ import java.util.Objects;
  */
 @RestController
 @RequestMapping("/api/resumeDelivery")
+@Slf4j
 public class ResumeDeliveryController {
 
     @Resource
@@ -75,5 +78,62 @@ public class ResumeDeliveryController {
         return iResumeDeliveryService.modifyStatus(id, status);
     }
 
+    /**
+     * 分页获取我投递的简历
+     *
+     * @param pageNum  页码
+     * @param pageSize 每页记录数
+     * @param status   状态
+     * @return 响应
+     */
+    @GetMapping
+    @PreAuthorize("hasAnyRole('seeker')")
+    public Result<IPage<DeliveryInfoVO>> queryDeliveryInfo(@RequestParam(value = "pageNum", defaultValue = "1", required = false) Integer pageNum,
+                                                           @RequestParam(value = "pageSize", defaultValue = "20", required = false) Integer pageSize,
+                                                           @RequestParam(value = "status", required = false) Integer status) {
+        return iResumeDeliveryService.queryDeliveryInfo(pageNum, pageNum, status);
+    }
+
+    /**
+     * 获取本人投递不同状态个数
+     *
+     * @return 响应
+     */
+    @GetMapping("/count")
+    @PreAuthorize("hasAnyRole('seeker')")
+    public Result<DeliveryCountVO> queryDeliveryCount() {
+        return iResumeDeliveryService.queryDeliveryCount();
+    }
+
+    /**
+     * 招聘者获取本公司被投递不同状态个数
+     *
+     * @return 响应
+     */
+    @GetMapping("/recruiter/count")
+    @PreAuthorize("hasAnyRole('recruiter')")
+    public Result<DeliveryCountVO> recruiterQueryDeliveryCount() {
+        return iResumeDeliveryService.recruiterQueryDeliveryCount();
+    }
+
+    /**
+     * 招聘者分页获取求职者投递简历信息
+     *
+     * @param pageNum      页码
+     * @param pageSize     每页记录数
+     * @param education    学历
+     * @param positionName 职位名称
+     * @param status       投递状态
+     * @return 响应
+     */
+    @GetMapping("/delivery")
+    @PreAuthorize("hasAnyRole('recruiter')")
+    public Result<IPage<ResumeDeliveryInfoVO>> queryResumeDeliveryInfo(@RequestParam(value = "pageNum", required = false, defaultValue = "1") Integer pageNum,
+                                                                       @RequestParam(value = "pageSize", defaultValue = "20", required = false) Integer pageSize,
+                                                                       @RequestParam(value = "education", required = false) Integer education,
+                                                                       @RequestParam(value = "positionName", required = false) String positionName,
+                                                                       @RequestParam(value = "status", required = false) Integer status) {
+        return iResumeDeliveryService.queryResumeDeliveryInfo(pageNum, pageSize, education, positionName, status);
+    }
 
 }

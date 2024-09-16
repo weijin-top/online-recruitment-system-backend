@@ -2,4 +2,62 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.weijin.recruitment.mapper.ResumeDeliveryMapper">
 
+    <select id="selectPageDeliveryInfo"
+            resultType="com.weijin.recruitment.model.vo.resumedelivery.DeliveryInfoVO">
+        select rd.id,rd.status as deliveryStatus,rd.create_time,c.nickname as companyNickname, c.logo as companyLogo,
+        p.name as positionName,p.mini_salary,p.max_salary,p.job_place,p.education,p.status as positionStatus,p.id as positionId
+        from t_resume_delivery as rd
+        join t_position as p on rd.position_id = p.id
+        join t_company as c on p.company_id = c.id
+        <trim prefix="where" prefixOverrides="and">
+            <if test='status != null'>rd.status = #{status}</if>
+            and rd.user_id = #{userId}
+            and rd.is_deleted = 0
+        </trim>
+        order by rd.create_time desc
+    </select>
+    <select id="selectDeliveryCountByUserId"
+            resultType="com.weijin.recruitment.model.vo.count.DeliveryCountVO">
+        select sum(case when status = 0 then 1 else 0 end) as notViewedCount,
+               sum(case when status = 1 then 1 else 0 end) as viewedCount,
+               sum(case when status = 2 then 1 else 0 end) as interestedCount,
+               sum(case when status = 3 then 1 else 0 end)   as interviewCount
+        from t_resume_delivery
+        where user_id = #{userId}
+    </select>
+    <select id="selectPageResumeDeliveryInfo"
+            resultType="com.weijin.recruitment.model.vo.resumedelivery.ResumeDeliveryInfoVO">
+        select rd.id,rd.user_id,i.name,i.phone,i.email,i.address,p.name as positionName,e.level as education,rd.status
+        from t_resume_delivery as rd
+        join t_info as i on rd.user_id = i.user_id
+        join t_position as p on rd.position_id = p.id
+        join (select user_id, MAX(level) AS level
+        from t_education
+        group by user_id
+        order by level desc limit 1) as e on i.user_id = e.user_id
+        join t_company as c on p.company_id = c.id
+        <trim prefix="where" prefixOverrides="and">
+            <if test='education != null and education != 0'>
+                e.level = #{education}
+            </if>
+            <if test='positionName != null and positionName != ""'>
+                and p.name = concat('%',#{positionName},'%')
+            </if>
+            <if test='status != null'>
+                and rd.status = #{status}
+            </if>
+            and c.id = #{companyId}
+            and rd.is_deleted = 0
+        </trim>
+    </select>
+    <select id="selectRecruiterQueryDeliveryCount"
+            resultType="com.weijin.recruitment.model.vo.count.DeliveryCountVO">
+        select sum(case when rd.status = 0 then 1 else 0 end) as notViewedCount,
+               sum(case when rd.status = 1 then 1 else 0 end) as viewedCount,
+               sum(case when rd.status = 2 then 1 else 0 end) as interestedCount,
+               sum(case when rd.status = 3 then 1 else 0 end) as interviewCount
+        from t_resume_delivery as rd
+                 join t_position as p on rd.position_id = p.id
+        where p.company_id = #{companyId}
+    </select>
 </mapper>

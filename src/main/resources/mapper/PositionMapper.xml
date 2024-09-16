@@ -18,10 +18,12 @@
                c.name as companyName,
                c.address,
                c.logo,
-               c.intro
+               c.intro,
+               rd.id as rdId
         from t_position as ps
-                 left join t_post as p on ps.type = p.id
-                 left join t_company as c on ps.company_id = c.id
+                join t_post as p on ps.type = p.id
+                join t_company as c on ps.company_id = c.id
+        left join t_resume_delivery as rd on ps.id = rd.position_id and rd.user_id = #{userId}
         where ps.id = #{id}
           and ps.is_deleted = 0
     </select>
@@ -34,12 +36,15 @@
         ps.job_place,
         c.name as companyName,
         c.logo,
-        p.name as postName
+        c.nickname as companyNickname,
+        p.name as postName,
+        ps.status
         from t_position as ps
         left join t_post as p on ps.type = p.id
         left join t_company as c on ps.company_id = c.id
         <trim prefixOverrides="and" prefix="where">
-            <if test='edu != null'>
+            <!-- 学历为0就是不限学历 -->
+            <if test='edu != null and edu != 0'>
                 ps.education = #{edu}
             </if>
             <if test='address != null and address != ""'>
@@ -51,7 +56,58 @@
             <if test='name != null and name != ""'>
                 and ps.name like concat('%',#{name},'%') or c.name like concat('%',#{name},'%')
             </if>
+            <if test="status != null">
+                and ps.status = #{status}
+            </if>
+            <if test="companyId != null">
+                and ps.company_id = #{status}
+            </if>
             and ps.is_deleted = 0
         </trim>
+        order by ps.create_time desc
+    </select>
+    <select id="selectOpenPosition" resultType="java.lang.Integer">
+        select sum(number) from t_position where status = 1
+    </select>
+    <select id="selectStatEdu" resultType="com.weijin.recruitment.model.vo.count.EduCountVO">
+        select
+        sum(case when education &lt;= 4 then 1 else 0 end ) as juniorCollegeAndBelowCount,
+        sum(case when education = 5 then 1 else 0 end ) as undergraduateCount,
+        sum(case when education = 6 then 1 else 0 end ) as masterCount,
+        sum(case when education = 7 then 1 else 0 end ) as doctorCount
+        from t_position where status = 1 and is_deleted = 0
+    </select>
+    <select id="selectStatPosition" resultType="com.weijin.recruitment.model.vo.count.PositionMonthCountVO">
+        SELECT
+            m.month,
+            COALESCE(count, 0) AS count
+        FROM
+            (
+           <!-- 生成最近六个月的所有月份 -->
+            SELECT
+            DATE_FORMAT(DATE_ADD(CURRENT_DATE(), INTERVAL -6 + n.n MONTH), '%Y-%m') AS month
+            FROM
+            (
+            SELECT 0 AS n
+            UNION ALL SELECT 1
+            UNION ALL SELECT 2
+            UNION ALL SELECT 3
+            UNION ALL SELECT 4
+            UNION ALL SELECT 5
+            ) n
+            ) m
+            LEFT JOIN
+            (
+            <!-- 实际记录数查询 -->
+            SELECT
+            DATE_FORMAT(create_time, '%Y-%m') AS month,
+            COUNT(*) AS count
+            FROM
+            t_position
+            WHERE
+            create_time >= DATE_SUB(CURRENT_DATE(), INTERVAL 6 MONTH)
+            GROUP BY
+            DATE_FORMAT(create_time, '%Y-%m')
+            ) c ON m.month = c.month
     </select>
 </mapper>

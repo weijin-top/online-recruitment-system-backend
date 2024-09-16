@@ -1,16 +1,14 @@
 package com.weijin.recruitment.controller;
 
 import com.weijin.recruitment.model.from.auth.LoginFrom;
-import com.weijin.recruitment.model.from.user.UserFrom;
-import com.weijin.recruitment.model.result.Result;
+import com.weijin.recruitment.model.from.user.RegisterFrom;
+import com.weijin.recruitment.common.Result;
 import com.weijin.recruitment.service.IAuthService;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.security.core.Authentication;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import java.security.Principal;
 
 /**
  * 认证管理
@@ -54,11 +52,22 @@ public class AuthController {
 
     /**
      * 注册用户
-     * @param userFrom 入参
+     * @param request request对象，用户获取sessionId
+     * @param registerFrom 入参
      * @return 响应
      */
     @PostMapping("/register")
-    public Result<String> register(@Validated @RequestBody UserFrom userFrom){
-       return iAuthService.register(userFrom);
+    public Result<String> register(HttpServletRequest request,@Validated @RequestBody RegisterFrom registerFrom){
+       return iAuthService.register(request,registerFrom);
+    }
+
+    /**
+     * 获取图片验证码
+     * @param request  request对象，获取sessionId
+     * @param response response对象，响应图片
+     */
+    @GetMapping("/captcha")
+    public void getCaptcha(HttpServletRequest request, HttpServletResponse response) {
+        iAuthService.getCaptcha(request, response);
     }
 }

@@ -2,7 +2,7 @@ package com.weijin.recruitment.controller;
 
 import com.weijin.recruitment.group.JobGroup;
 import com.weijin.recruitment.model.from.job.JobFrom;
-import com.weijin.recruitment.model.result.Result;
+import com.weijin.recruitment.common.Result;
 import com.weijin.recruitment.model.vo.job.JobVO;
 import com.weijin.recruitment.service.IJobService;
 import jakarta.annotation.Resource;
@@ -19,7 +19,7 @@ import java.util.List;
  * @since 2024-06-30
  */
 @RestController
-@RequestMapping("/api/practice")
+@RequestMapping("/api/job")
 public class JobController {
 
     @Resource

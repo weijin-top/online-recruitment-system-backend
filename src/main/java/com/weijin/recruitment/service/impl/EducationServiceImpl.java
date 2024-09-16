@@ -5,7 +5,7 @@ import com.weijin.recruitment.converter.EducationConverter;
 import com.weijin.recruitment.model.entity.Education;
 import com.weijin.recruitment.mapper.EducationMapper;
 import com.weijin.recruitment.model.from.education.EducationFrom;
-import com.weijin.recruitment.model.result.Result;
+import com.weijin.recruitment.common.Result;
 import com.weijin.recruitment.model.vo.education.EducationVO;
 import com.weijin.recruitment.service.IEducationService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

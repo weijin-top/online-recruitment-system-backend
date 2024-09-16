@@ -3,18 +3,17 @@ package com.weijin.recruitment.controller;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.weijin.recruitment.group.PositionGroup;
 import com.weijin.recruitment.model.from.position.PositionFrom;
-import com.weijin.recruitment.model.result.Result;
+import com.weijin.recruitment.common.Result;
 import com.weijin.recruitment.model.vo.position.PositionDetailVO;
 import com.weijin.recruitment.model.vo.position.PositionSimpleVO;
+import com.weijin.recruitment.model.vo.position.PositionVO;
 import com.weijin.recruitment.service.IPositionService;
-import com.weijin.recruitment.service.IPostService;
 import jakarta.annotation.Resource;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.stereotype.Controller;
 
 /**
  * 职位管理
@@ -55,6 +54,18 @@ public class PositionController {
     }
 
     /**
+     *
+     * 根据id查询职位
+     * @param id 职位id
+     * @return 响应
+     */
+    @GetMapping("/{id}")
+    @PreAuthorize("hasAnyRole('recruiter')")
+    public Result<PositionVO> queryPositionById(@PathVariable("id") Integer id) {
+        return iPositionService.queryPositionById(id);
+    }
+
+    /**
      * 审核职位
      *
      * @param id     职位id
@@ -89,7 +100,7 @@ public class PositionController {
      * @param id 职位id
      * @return 响应
      */
-    @GetMapping("/{id}")
+    @GetMapping("/detail/{id}")
     @PreAuthorize("hasAnyRole('seeker','recruiter','admin')")
     public Result<PositionDetailVO> querySinge(@PathVariable("id") Integer id) {
         return iPositionService.querySinge(id);
@@ -104,6 +115,7 @@ public class PositionController {
      * @param address  工作地点
      * @param type     职位类别
      * @param name     职位名称或公司名称
+     * @param status 职位状态
      * @return 响应
      */
     @GetMapping("/page")
@@ -114,7 +126,8 @@ public class PositionController {
             @RequestParam(value = "edu", required = false) Integer edu,
             @RequestParam(value = "address", required = false) String address,
             @RequestParam(value = "type", required = false) Integer type,
-            @RequestParam(value = "name", required = false) String name) {
-        return iPositionService.pagePosition(pageNum,pageSize,edu,address,type,name);
+            @RequestParam(value = "name", required = false) String name,
+            @RequestParam(value = "status",required = false)Integer status) {
+        return iPositionService.pagePosition(pageNum,pageSize,edu,address,type,name,status);
     }
 }

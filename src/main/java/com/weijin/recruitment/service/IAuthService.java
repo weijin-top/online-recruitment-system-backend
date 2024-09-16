@@ -1,9 +1,10 @@
 package com.weijin.recruitment.service;
 
 import com.weijin.recruitment.model.from.auth.LoginFrom;
-import com.weijin.recruitment.model.from.user.UserFrom;
-import com.weijin.recruitment.model.result.Result;
+import com.weijin.recruitment.model.from.user.RegisterFrom;
+import com.weijin.recruitment.common.Result;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 /**
  * @Author WeiJin
@@ -14,7 +15,8 @@ public interface IAuthService {
 
     /**
      * 用户登录
-     * @param request request对象，用户获取sessionId
+     *
+     * @param request   request对象，用户获取sessionId
      * @param loginFrom 用户登录信息
      * @return token
      */
@@ -22,6 +24,7 @@ public interface IAuthService {
 
     /**
      * 退出登录
+     *
      * @param request 请求对象
      * @return 响应
      */
@@ -29,8 +32,18 @@ public interface IAuthService {
 
     /**
      * 注册用户
-     * @param userFrom 入参
+     *
+     * @param request      request对象，用户获取sessionId
+     * @param registerFrom 入参
      * @return 响应
      */
-    Result<String> register(UserFrom userFrom);
+    Result<String> register(HttpServletRequest request, RegisterFrom registerFrom);
+
+    /**
+     * 获取图片验证码
+     *
+     * @param request  request对象，获取sessionId
+     * @param response response对象，响应图片
+     */
+    void getCaptcha(HttpServletRequest request, HttpServletResponse response);
 }

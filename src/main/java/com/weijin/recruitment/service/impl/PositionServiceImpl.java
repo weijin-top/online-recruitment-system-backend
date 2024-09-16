@@ -5,25 +5,21 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.weijin.recruitment.converter.PositionConverter;
 import com.weijin.recruitment.mapper.CompanyMapper;
-import com.weijin.recruitment.mapper.EducationMapper;
-import com.weijin.recruitment.mapper.InfoMapper;
 import com.weijin.recruitment.model.entity.Company;
-import com.weijin.recruitment.model.entity.Education;
-import com.weijin.recruitment.model.entity.Info;
 import com.weijin.recruitment.model.entity.Position;
 import com.weijin.recruitment.mapper.PositionMapper;
+import com.weijin.recruitment.common.RoleEnum;
 import com.weijin.recruitment.model.from.position.PositionFrom;
-import com.weijin.recruitment.model.result.Result;
+import com.weijin.recruitment.common.Result;
 import com.weijin.recruitment.model.vo.position.PositionDetailVO;
 import com.weijin.recruitment.model.vo.position.PositionSimpleVO;
+import com.weijin.recruitment.model.vo.position.PositionVO;
 import com.weijin.recruitment.service.IPositionService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.weijin.recruitment.util.SecurityUtil;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Objects;
 
 /**
@@ -41,10 +37,7 @@ public class PositionServiceImpl extends ServiceImpl<PositionMapper, Position> i
     private PositionConverter positionConverter;
     @Resource
     private CompanyMapper companyMapper;
-    @Resource
-    private InfoMapper infoMapper;
-    @Resource
-    private EducationMapper educationMapper;
+
 
     @Override
     public Result<String> savePosition(PositionFrom positionFrom) {
@@ -53,6 +46,9 @@ public class PositionServiceImpl extends ServiceImpl<PositionMapper, Position> i
         Company company = companyMapper.selectOne(companyLambdaQueryWrapper);
         if (Objects.isNull(company)) {
             return Result.failed("你还没有认证公司，请先认证公司后再发布岗位");
+        }
+        if (company.getStatus() != 1) {
+            return Result.failed("你的公司还没通过审核或审核未通过，暂时无法发布职位");
         }
         if (positionFrom.getMaxSalary() < positionFrom.getMiniSalary()) {
             return Result.failed("最高薪资小于最低新增，请重新输入");
@@ -91,7 +87,7 @@ public class PositionServiceImpl extends ServiceImpl<PositionMapper, Position> i
 
     @Override
     public Result<PositionDetailVO> querySinge(Integer id) {
-        PositionDetailVO positionDetailVO = baseMapper.selectPositionDetailById(id);
+        PositionDetailVO positionDetailVO = baseMapper.selectPositionDetailById(id,SecurityUtil.getUserId());
         if (Objects.isNull(positionDetailVO)) {
             return Result.failed("岗位不存在，或岗位已被删除");
         }
@@ -102,15 +98,27 @@ public class PositionServiceImpl extends ServiceImpl<PositionMapper, Position> i
     }
 
     @Override
-    public Result<IPage<PositionSimpleVO>> pagePosition(Integer pageNum, Integer pageSize, Integer edu, String address, Integer type, String name) {
+    public Result<IPage<PositionSimpleVO>> pagePosition(Integer pageNum, Integer pageSize, Integer edu,
+                                                        String address, Integer type, String name, Integer status) {
 
 //        LambdaQueryWrapper<Info> infoWrapper = new LambdaQueryWrapper<Info>().eq(Info::getUserId, SecurityUtil.getUserId());
 //        Info info = infoMapper.selectOne(infoWrapper);
 
 
         IPage<PositionSimpleVO> page = new Page<>(pageNum, pageSize);
-
-        IPage<PositionSimpleVO> positionPage = baseMapper.pagePosition(page, edu, address, type, name);
+        IPage<PositionSimpleVO> positionPage = null;
+        //企业员工处理
+        if(Objects.equals(SecurityUtil.getRole(), RoleEnum.RECRUITER.name())){
+            LambdaQueryWrapper<Company> wrapper = new LambdaQueryWrapper<Company>()
+                    .eq(Company::getUserId, SecurityUtil.getUserId());
+            Company company = companyMapper.selectOne(wrapper);
+            if (Objects.isNull(company)){
+                return Result.failed("你还没有认证企业，暂无数据");
+            }
+            positionPage = baseMapper.pagePosition(page, edu, address, type, name,status,company.getId());
+        }
+        //管理员查询职位
+        positionPage = baseMapper.pagePosition(page, edu, address, type, name,status,null);
 
 
         //构建参数，如果用户没有筛选条件，就从从用户求职期望获取推荐职位
@@ -129,7 +137,17 @@ public class PositionServiceImpl extends ServiceImpl<PositionMapper, Position> i
 //            type = info.getPostId();
 //        }
 
-        return !positionPage.getRecords().isEmpty() ? Result.success("筛选成功", positionPage) : Result.failed("筛选结果为空");
+        return Result.success("筛选成功", positionPage);
+    }
+
+    @Override
+    public Result<PositionVO> queryPositionById(Integer id) {
+        Position position = baseMapper.selectById(id);
+        if (Objects.isNull(position)){
+            return Result.failed("该职位不存在");
+        }
+        PositionVO positionVO = positionConverter.entityToVO(position);
+        return Result.success("查询成功",positionVO);
     }
 
 

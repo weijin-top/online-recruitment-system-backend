@@ -2,7 +2,7 @@ package com.weijin.recruitment.controller;
 
 import com.weijin.recruitment.group.EducationGroup;
 import com.weijin.recruitment.model.from.education.EducationFrom;
-import com.weijin.recruitment.model.result.Result;
+import com.weijin.recruitment.common.Result;
 import com.weijin.recruitment.model.vo.education.EducationVO;
 import com.weijin.recruitment.service.IEducationService;
 import jakarta.annotation.Resource;

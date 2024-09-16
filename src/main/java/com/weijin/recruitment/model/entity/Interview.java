@@ -28,7 +28,7 @@ public class Interview implements Serializable {
 
     private Integer rdId;
 
-
+    private Integer userId;
 
     /**
      * 面试时间
@@ -46,7 +46,7 @@ public class Interview implements Serializable {
     private String interviewRemark;
 
     /**
-     * 面试状态 0未通过1通过
+     * 面试状态 0待面试1通过2未通过
      */
     private Integer status;
 
@@ -54,6 +54,9 @@ public class Interview implements Serializable {
      * 面试结果备注
      */
     private String resultRemark;
+
+    @TableField(fill = FieldFill.INSERT)
+    private LocalDateTime createTime;
 
     @TableLogic(value = "0", delval = "1")
     private Integer isDeleted;
@@ -64,6 +67,7 @@ public class Interview implements Serializable {
         return "Interview{" +
                 "id = " + id +
                 ", rdId = " + rdId +
+                ", userId = " + userId +
                 ", time = " + time +
                 ", address = " + address +
                 ", interviewRemark = " + interviewRemark +

@@ -2,4 +2,22 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.weijin.recruitment.mapper.InfoMapper">
 
+    <select id="selectResume" resultType="com.weijin.recruitment.model.vo.info.ResumeVO">
+        select u.avatar,
+               p.name as postName,
+               i.name,
+               i.city,
+               i.address,
+               i.age,
+               i.phone,
+               i.email,
+               i.gender,
+               i.skill,
+               i.summary
+        from t_info as i
+                 left join t_user as u on i.user_id = u.id and u.is_deleted = 0
+                 left join t_post as p on i.post_id = p.id and p.is_deleted = 0
+        where i.user_id = #{userId}
+          and i.is_deleted = 0
+    </select>
 </mapper>

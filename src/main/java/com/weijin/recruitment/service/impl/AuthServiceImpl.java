@@ -1,35 +1,36 @@
 package com.weijin.recruitment.service.impl;
 
+import cn.hutool.captcha.CaptchaUtil;
+import cn.hutool.captcha.LineCaptcha;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.weijin.recruitment.common.Constant;
 import com.weijin.recruitment.converter.UserConverter;
-import com.weijin.recruitment.mapper.CompanyMapper;
 import com.weijin.recruitment.mapper.UserMapper;
-import com.weijin.recruitment.model.entity.Company;
 import com.weijin.recruitment.model.entity.User;
-import com.weijin.recruitment.model.enumtype.RoleEnum;
+import com.weijin.recruitment.common.RoleEnum;
 import com.weijin.recruitment.model.from.auth.LoginFrom;
-import com.weijin.recruitment.model.from.user.UserFrom;
-import com.weijin.recruitment.model.result.Result;
+import com.weijin.recruitment.model.from.user.RegisterFrom;
+import com.weijin.recruitment.common.Result;
 import com.weijin.recruitment.model.security.SecurityUserDetails;
 import com.weijin.recruitment.service.IAuthService;
 import com.weijin.recruitment.util.JwtUtil;
 import jakarta.annotation.Resource;
+import jakarta.servlet.ServletOutputStream;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.SneakyThrows;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.ArrayList;
+import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
@@ -52,11 +53,24 @@ public class AuthServiceImpl implements IAuthService {
     private ObjectMapper objectMapper;
     @Resource
     private UserConverter userConverter;
-
+    @Resource
+    private RedisTemplate<String,String> redisTemplate;
 
     @SneakyThrows(JsonProcessingException.class)
     @Override
     public Result<String> login(HttpServletRequest request, LoginFrom loginFrom) {
+        //判断验证码
+        String key = Constant.APPLICATION + "-code:" + request.getSession().getId();
+        String rightCode = redisTemplate.opsForValue().get(key);
+        if (StringUtils.isBlank(rightCode)) {
+            return Result.failed("验证码无效");
+        }
+        if (!rightCode.equalsIgnoreCase(loginFrom.getCode())) {
+            return Result.failed("验证码错误");
+        }
+        // 验证码校验后redis清除验证码，避免重复使用
+        redisTemplate.delete(key);
+
         // 根据用户名获取用户信息
         LambdaQueryWrapper<User> wrapper = new LambdaQueryWrapper<User>()
                 .eq(User::getUsername, loginFrom.getUsername());
@@ -105,10 +119,42 @@ public class AuthServiceImpl implements IAuthService {
     }
 
     @Override
-    public Result<String> register(UserFrom userFrom) {
-        User user = userConverter.fromToEntity(userFrom);
+    public Result<String> register(HttpServletRequest request,RegisterFrom registerFrom) {
+        //判断验证码
+        String key = Constant.APPLICATION + "-code:" + request.getSession().getId();
+        String rightCode = redisTemplate.opsForValue().get(key);
+        if (StringUtils.isBlank(rightCode)) {
+            return Result.failed("验证码无效");
+        }
+        if (!rightCode.equalsIgnoreCase(registerFrom.getCode())) {
+            return Result.failed("验证码错误");
+        }
+        // 验证码校验后redis清除验证码，避免重复使用
+        redisTemplate.delete(key);
+
+        User user = userConverter.registerFromToEntity(registerFrom);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         int inserted = userMapper.insert(user);
         return inserted > 0 ? Result.success("注册成功") : Result.failed("注册失败");
     }
+
+    @SneakyThrows(IOException.class)
+    @Override
+    public void getCaptcha(HttpServletRequest request, HttpServletResponse response) {
+        // 生成线性图形验证码的静态方法，参数：图片宽，图片高，验证码字符个数 干扰个数
+        LineCaptcha captcha = CaptchaUtil
+                .createLineCaptcha(200, 100, 4, 300);
+
+        // 把验证码存放进redis
+        // 获取验证码
+        String code = captcha.getCode();
+        String key = Constant.APPLICATION + "-code:" + request.getSession().getId();
+        redisTemplate.opsForValue().set(key, code, 5, TimeUnit.MINUTES);
+        // 把图片响应到输出流
+        response.setContentType("image/jpeg");
+        ServletOutputStream os = response.getOutputStream();
+        captcha.write(os);
+        os.close();
+    }
+
 }

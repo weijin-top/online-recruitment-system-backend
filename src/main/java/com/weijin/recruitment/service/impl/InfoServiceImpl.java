@@ -6,17 +6,13 @@ import com.weijin.recruitment.converter.EducationConverter;
 import com.weijin.recruitment.converter.InfoConverter;
 import com.weijin.recruitment.converter.JobConverter;
 import com.weijin.recruitment.converter.ProjectConverter;
-import com.weijin.recruitment.mapper.EducationMapper;
-import com.weijin.recruitment.mapper.InfoMapper;
-import com.weijin.recruitment.mapper.JobMapper;
-import com.weijin.recruitment.mapper.ProjectMapper;
+import com.weijin.recruitment.mapper.*;
 import com.weijin.recruitment.model.entity.Education;
 import com.weijin.recruitment.model.entity.Info;
 import com.weijin.recruitment.model.entity.Job;
 import com.weijin.recruitment.model.entity.Project;
 import com.weijin.recruitment.model.from.info.InfoFrom;
-import com.weijin.recruitment.model.result.Result;
-import com.weijin.recruitment.model.vo.education.EducationVO;
+import com.weijin.recruitment.common.Result;
 import com.weijin.recruitment.model.vo.info.InfoVO;
 import com.weijin.recruitment.model.vo.info.ResumeVO;
 import com.weijin.recruitment.service.IInfoService;
@@ -49,6 +45,8 @@ public class InfoServiceImpl extends ServiceImpl<InfoMapper, Info> implements II
     private JobConverter jobConverter;
     @Resource
     private ProjectConverter projectConverter;
+    @Resource
+    private PostMapper postMapper;
 
     @Override
     public Result<String> saveInfo(InfoFrom infoFrom) {
@@ -80,20 +78,20 @@ public class InfoServiceImpl extends ServiceImpl<InfoMapper, Info> implements II
     @Override
     public Result<ResumeVO> queryResume(Integer userId) {
         //获取基本信息
-        LambdaQueryWrapper<Info> infoWrapper = new LambdaQueryWrapper<Info>().eq(Info::getUserId, SecurityUtil.getUserId());
-        Info info = baseMapper.selectOne(infoWrapper);
-
-        ResumeVO resumeVO = infoConverter.entityTOResumeVO(info);
+        ResumeVO resumeVO = baseMapper.selectResume(userId);
+        if (Objects.isNull(resumeVO)) {
+            return Result.failed("该用户简历不存在");
+        }
 
         LambdaQueryWrapper<Education> educationWrapper = new LambdaQueryWrapper<Education>()
-                .eq(Education::getUserId, SecurityUtil.getUserId());
+                .eq(Education::getUserId, userId);
         List<Education> educations = educationMapper.selectList(educationWrapper);
 
-        LambdaQueryWrapper<Job> jobWrapper = new LambdaQueryWrapper<Job>().eq(Job::getUserId, SecurityUtil.getUserId());
+        LambdaQueryWrapper<Job> jobWrapper = new LambdaQueryWrapper<Job>().eq(Job::getUserId, userId);
         List<Job> jobs = jobMapper.selectList(jobWrapper);
 
         LambdaQueryWrapper<Project> projectWrapper = new LambdaQueryWrapper<Project>()
-                .eq(Project::getUserId, SecurityUtil.getUserId());
+                .eq(Project::getUserId, userId);
         List<Project> projects = projectMapper.selectList(projectWrapper);
 
         resumeVO.setEducationVOS(educationConverter.listEntityToListVO(educations));
@@ -101,7 +99,7 @@ public class InfoServiceImpl extends ServiceImpl<InfoMapper, Info> implements II
         resumeVO.setProjectVOS(projectConverter.listEntityToListVO(projects));
 
 
-        return Result.success(null,resumeVO);
+        return Result.success(null, resumeVO);
     }
 
 }

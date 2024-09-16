@@ -1,9 +1,13 @@
 package com.weijin.recruitment.converter;
 
 import com.weijin.recruitment.model.entity.Post;
+import com.weijin.recruitment.model.from.post.ModifyPostFrom;
 import com.weijin.recruitment.model.from.post.PostFrom;
+import com.weijin.recruitment.model.vo.post.PostVO;
 import org.mapstruct.Mapper;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 /**
  * @Author WeiJin
@@ -15,4 +19,6 @@ import org.springframework.stereotype.Component;
 public interface PostConverter {
 
     Post fromToEntity(PostFrom postFrom);
+
+    Post modifyFromToEntity(ModifyPostFrom modifyPostFrom);
 }

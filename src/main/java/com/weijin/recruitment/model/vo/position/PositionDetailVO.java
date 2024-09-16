@@ -40,7 +40,10 @@ public class PositionDetailVO {
     private String logo;
 
     private String intro;
-
+    /**
+     * 投递id，用于判断求职者是否投递了该职位
+     */
+    private Integer rdId;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createTime;
 }

@@ -19,6 +19,8 @@ import java.time.LocalDateTime;
 public class SaveInterviewFrom {
     @NotNull(message = "简历投递id不能为空", groups = InterviewGroup.SaveInterviewGroup.class)
     private Integer rdId;
+    @NotNull(message = "被邀请人id不能为空", groups = InterviewGroup.SaveInterviewGroup.class)
+    private Integer userId;
     @FutureOrPresent(message = "面试时间只能在当前时间之后", groups = InterviewGroup.SaveInterviewGroup.class)
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Shanghai")

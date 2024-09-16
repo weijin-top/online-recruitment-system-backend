@@ -8,7 +8,7 @@
         where is_deleted = 0
           and parent_id is null
     </select>
-    <select id="selectChildPosts" resultType="com.weijin.recruitment.model.vo.post.PostVO">
+    <select id="selectChildPosts"  resultMap="postMap">
         select id, parent_id, name
         from t_post
         where is_deleted = 0
@@ -19,5 +19,6 @@
         <collection property="postVOS" autoMapping="true" column="id"
                     ofType="com.weijin.recruitment.model.vo.post.PostVO"
                     select="com.weijin.recruitment.mapper.PostMapper.selectChildPosts"/>
+
     </resultMap>
 </mapper>

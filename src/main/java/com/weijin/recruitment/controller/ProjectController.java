@@ -2,7 +2,7 @@ package com.weijin.recruitment.controller;
 
 import com.weijin.recruitment.group.ProjectGroup;
 import com.weijin.recruitment.model.from.project.ProjectFrom;
-import com.weijin.recruitment.model.result.Result;
+import com.weijin.recruitment.common.Result;
 import com.weijin.recruitment.model.vo.project.ProjectVO;
 import com.weijin.recruitment.service.IProjectService;
 import jakarta.annotation.Resource;

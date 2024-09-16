@@ -3,7 +3,7 @@ package com.weijin.recruitment.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.weijin.recruitment.model.entity.Info;
 import com.weijin.recruitment.model.from.info.InfoFrom;
-import com.weijin.recruitment.model.result.Result;
+import com.weijin.recruitment.common.Result;
 import com.weijin.recruitment.model.vo.info.InfoVO;
 import com.weijin.recruitment.model.vo.info.ResumeVO;
 

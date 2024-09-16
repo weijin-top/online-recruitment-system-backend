@@ -37,7 +37,7 @@ public class Education implements Serializable {
     private String major;
 
     /**
-     * 学历,1小学2初中3中专4高中5大专6本科7研究生
+     * 学历,1小学2初中3高中4大专5本科6硕士7博士
      */
     private Integer level;
 

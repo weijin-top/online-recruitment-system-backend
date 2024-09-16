@@ -19,13 +19,13 @@ public class PositionFrom {
     @NotNull(message = "岗位id不能为空", groups = PositionGroup.ModifyPositionGroup.class)
     private Integer id;
 
-    @NotBlank(message = "岗位名称不能为空",groups = PositionGroup.SavePositionGroup.class)
+    @NotBlank(message = "职位名称不能为空",groups = PositionGroup.SavePositionGroup.class)
     private String name;
 
     /**
      * 职位类型
      */
-    @NotNull(message = "岗位类型不能为空",groups = PositionGroup.SavePositionGroup.class)
+    @NotNull(message = "职位类型不能为空",groups = PositionGroup.SavePositionGroup.class)
     private Integer type;
 
     /**

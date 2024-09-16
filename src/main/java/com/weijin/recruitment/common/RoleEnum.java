@@ -1,6 +1,5 @@
-package com.weijin.recruitment.model.enumtype;
+package com.weijin.recruitment.common;
 
-import lombok.Data;
 import lombok.Getter;
 
 import java.util.Objects;

@@ -2,12 +2,10 @@ package com.weijin.recruitment.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.weijin.recruitment.converter.ProjectConverter;
-import com.weijin.recruitment.model.entity.Job;
 import com.weijin.recruitment.model.entity.Project;
 import com.weijin.recruitment.mapper.ProjectMapper;
 import com.weijin.recruitment.model.from.project.ProjectFrom;
-import com.weijin.recruitment.model.result.Result;
-import com.weijin.recruitment.model.vo.job.JobVO;
+import com.weijin.recruitment.common.Result;
 import com.weijin.recruitment.model.vo.project.ProjectVO;
 import com.weijin.recruitment.service.IProjectService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

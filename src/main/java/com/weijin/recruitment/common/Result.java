@@ -1,6 +1,5 @@
-package com.weijin.recruitment.model.result;
+package com.weijin.recruitment.common;
 
-import lombok.Builder;
 import lombok.Data;
 
 import java.io.Serializable;

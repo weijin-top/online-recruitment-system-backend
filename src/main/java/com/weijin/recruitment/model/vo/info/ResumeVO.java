@@ -17,7 +17,7 @@ public class ResumeVO {
     private Integer userId;
 
     private String postName;
-
+    private String avatar;
     private String city;
 
     private String name;

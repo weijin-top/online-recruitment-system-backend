@@ -21,7 +21,7 @@ public class InfoFrom {
     private String city;
     @NotBlank(message = "真实姓名不能为空", groups = InfoGroup.SaveInfoGroup.class)
     private String name;
-    @NotBlank(message = "现居住地址不能为空", groups = InfoGroup.SaveInfoGroup.class)
+    @NotBlank(message = "现居住地不能为空", groups = InfoGroup.SaveInfoGroup.class)
     private String address;
     @Min(value = 18, message = "年龄至少18岁", groups = InfoGroup.SaveInfoGroup.class)
     @Max(value = 65, message = "年龄最大65岁", groups = InfoGroup.SaveInfoGroup.class)

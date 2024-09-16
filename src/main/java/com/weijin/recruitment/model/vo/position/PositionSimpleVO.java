@@ -21,9 +21,12 @@ public class PositionSimpleVO {
 
     private String companyName;
 
+    private String companyNickname;
+
     private String postName;
 
     private String logo;
 
     private String jobPlace;
+    private Integer status;
 }

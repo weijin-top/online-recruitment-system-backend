@@ -1,8 +1,8 @@
 package com.weijin.recruitment.config;
 
 import com.weijin.recruitment.filter.VerifyTokenFilter;
-import com.weijin.recruitment.model.result.ResponseResult;
-import com.weijin.recruitment.model.result.Result;
+import com.weijin.recruitment.common.ResponseResult;
+import com.weijin.recruitment.common.Result;
 import jakarta.annotation.Resource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

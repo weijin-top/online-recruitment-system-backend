@@ -2,4 +2,31 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.weijin.recruitment.mapper.InterviewMapper">
 
+    <select id="selectPageInterviewInfo"
+            resultType="com.weijin.recruitment.model.vo.interview.InterviewInfoVO">
+        select i.id, p.name as positionName, c.nickname as companyNickname, p.job_place, i.status
+        from t_interview as i
+                 join t_resume_delivery as rd on i.rd_id = rd.id
+                 join t_position as p on rd.position_id = p.id
+                 join t_company as c on p.company_id = c.id
+        where i.user_id = #{userId}
+    </select>
+    <select id="selectPageInterviewResult" resultType="com.weijin.recruitment.model.vo.interview.InterviewResultVO">
+        select iv.id,iv.user_id,i.name,i.phone,i.email,i.address,p.name as positionName,iv.status
+        from t_interview as iv
+        join t_resume_delivery as rd on iv.rd_id = rd.id
+        join t_info as i on iv.user_id = i.user_id
+        join t_position as p on rd.position_id = p.id
+        join t_company as c on p.company_id = c.id
+        <trim prefix="where" prefixOverrides="and">
+            <if test='positionName != null and positionName != ""'>
+                and p.name = concat('%',#{positionName},'%')
+            </if>
+            <if test='status != null'>
+                and rd.status = #{status}
+            </if>
+            and c.id = #{companyId}
+            and rd.is_deleted = 0
+        </trim>
+    </select>
 </mapper>

@@ -3,7 +3,7 @@ package com.weijin.recruitment.controller;
 import com.weijin.recruitment.group.InfoGroup;
 import com.weijin.recruitment.model.from.info.InfoFrom;
 import com.weijin.recruitment.model.vo.info.ResumeVO;
-import com.weijin.recruitment.model.result.Result;
+import com.weijin.recruitment.common.Result;
 import com.weijin.recruitment.model.vo.info.InfoVO;
 import com.weijin.recruitment.service.IInfoService;
 import jakarta.annotation.Resource;

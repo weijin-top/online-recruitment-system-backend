@@ -1,7 +1,9 @@
 package com.weijin.recruitment.converter;
 
 import com.weijin.recruitment.model.entity.User;
+import com.weijin.recruitment.model.from.user.RegisterFrom;
 import com.weijin.recruitment.model.from.user.UserFrom;
+import com.weijin.recruitment.model.vo.user.UserVO;
 import org.mapstruct.Mapper;
 import org.springframework.stereotype.Component;
 
@@ -14,5 +16,10 @@ import org.springframework.stereotype.Component;
 @Mapper(componentModel = "spring")
 public interface UserConverter {
 
-    User fromToEntity(UserFrom userFrom);
+    User registerFromToEntity(RegisterFrom registerFrom);
+
+    UserVO entityToVO(User user);
+
+    User FromToEntity(UserFrom userFrom);
+
 }
