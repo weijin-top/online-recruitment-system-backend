@@ -60,7 +60,7 @@
                 and ps.status = #{status}
             </if>
             <if test="companyId != null">
-                and ps.company_id = #{status}
+                and ps.company_id = #{companyId}
             </if>
             and ps.is_deleted = 0
         </trim>

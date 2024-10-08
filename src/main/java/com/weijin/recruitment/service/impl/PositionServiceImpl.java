@@ -107,35 +107,19 @@ public class PositionServiceImpl extends ServiceImpl<PositionMapper, Position> i
 
         IPage<PositionSimpleVO> page = new Page<>(pageNum, pageSize);
         IPage<PositionSimpleVO> positionPage = null;
-        //企业员工处理
-        if(Objects.equals(SecurityUtil.getRole(), RoleEnum.RECRUITER.name())){
+        //构建企业员工公司id参数
+        Integer companyId = null;
+        if(Objects.equals(SecurityUtil.getRole(), RoleEnum.getRole(2))){
             LambdaQueryWrapper<Company> wrapper = new LambdaQueryWrapper<Company>()
                     .eq(Company::getUserId, SecurityUtil.getUserId());
             Company company = companyMapper.selectOne(wrapper);
             if (Objects.isNull(company)){
                 return Result.failed("你还没有认证企业，暂无数据");
             }
-            positionPage = baseMapper.pagePosition(page, edu, address, type, name,status,company.getId());
+            companyId = company.getId();
         }
-        //管理员查询职位
-        positionPage = baseMapper.pagePosition(page, edu, address, type, name,status,null);
-
-
-        //构建参数，如果用户没有筛选条件，就从从用户求职期望获取推荐职位
-
-//        if (Objects.isNull(edu)) {
-//            LambdaQueryWrapper<Education> eduWrapper = new LambdaQueryWrapper<Education>().eq(Education::getUserId, SecurityUtil.getUserId());
-//            List<Education> educations = educationMapper.selectList(eduWrapper);
-//            Integer[] levels = educations.stream().map(Education::getLevel).toArray(Integer[]::new);
-//            Arrays.sort(levels);
-//            edu = levels[0];
-//        }
-//        if (Objects.isNull(address)) {
-//            address = info.getAddress();
-//        }
-//        if (Objects.isNull(type)) {
-//            type = info.getPostId();
-//        }
+        //查询
+        positionPage = baseMapper.pagePosition(page, edu, address, type, name,status,companyId);
 
         return Result.success("筛选成功", positionPage);
     }
