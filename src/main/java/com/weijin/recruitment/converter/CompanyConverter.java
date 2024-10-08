@@ -6,6 +6,7 @@ import com.weijin.recruitment.model.entity.Company;
 import com.weijin.recruitment.model.from.company.CompanyFrom;
 import com.weijin.recruitment.model.vo.company.CompanyVO;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.springframework.stereotype.Component;
 
 /**
@@ -21,5 +22,6 @@ public interface CompanyConverter {
 
     Page<CompanyVO> entityPageToVO(IPage<Company> page);
 
+    @Mapping(source = "nickname",target = "nickname")
     CompanyVO entityToVO(Company company);
 }

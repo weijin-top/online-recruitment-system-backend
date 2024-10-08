@@ -81,7 +81,7 @@ public class CompanyServiceImpl extends ServiceImpl<CompanyMapper, Company> impl
             return Result.failed("企业信息id不能为空");
         }
         LambdaQueryWrapper<Company> wrapper = new LambdaQueryWrapper<Company>()
-                .select(Company::getId, Company::getName, Company::getAddress,
+                .select(Company::getId, Company::getName, Company::getNickname, Company::getAddress,
                         Company::getIntro, Company::getLogo, Company::getStatus)
                 .eq(Objects.nonNull(id) && Objects.equals(SecurityUtil.getRole(), RoleEnum.getRole(3)),
                         Company::getId, id)

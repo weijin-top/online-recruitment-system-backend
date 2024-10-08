@@ -15,6 +15,7 @@ import lombok.Data;
 public class CompanyVO {
     private Integer id;
     private String name;
+    private String nickname;
     private String address;
     private String logo;
     private String intro;
