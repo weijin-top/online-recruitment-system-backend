@@ -47,9 +47,9 @@ public class PositionServiceImpl extends ServiceImpl<PositionMapper, Position> i
         if (Objects.isNull(company)) {
             return Result.failed("你还没有认证公司，请先认证公司后再发布岗位");
         }
-        if (company.getStatus() != 1) {
-            return Result.failed("你的公司还没通过审核或审核未通过，暂时无法发布职位");
-        }
+//        if (company.getStatus() != 1) {
+//            return Result.failed("你的公司还没通过审核或审核未通过，暂时无法发布职位");
+//        }
         if (positionFrom.getMaxSalary() < positionFrom.getMiniSalary()) {
             return Result.failed("最高薪资小于最低新增，请重新输入");
         }
