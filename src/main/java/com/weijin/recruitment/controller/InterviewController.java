@@ -95,7 +95,7 @@ public class InterviewController {
     public Result<IPage<InterviewResultVO>> queryInterviewResult(@RequestParam(value = "pageNum", required = false, defaultValue = "1") Integer pageNum,
                                                                  @RequestParam(value = "pageSize", defaultValue = "20", required = false) Integer pageSize,
                                                                  @RequestParam(value = "positionName", required = false) String positionName,
-                                                                 @RequestParam(value = "status", required = false) Integer status) {
+                                                                 @RequestParam(value = "status", required = false) String status) {
         return iInterviewService.queryInterviewResult(pageNum, pageSize, positionName, status);
     }
 

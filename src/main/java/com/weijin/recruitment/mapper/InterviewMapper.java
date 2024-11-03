@@ -6,6 +6,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.weijin.recruitment.model.vo.interview.InterviewInfoVO;
 import com.weijin.recruitment.model.vo.interview.InterviewResultVO;
 
+import java.util.List;
+
 /**
  * <p>
  *  Mapper 接口
@@ -33,5 +35,5 @@ public interface InterviewMapper extends BaseMapper<Interview> {
      * @return 结果
      */
     IPage<InterviewResultVO> selectPageInterviewResult(IPage<InterviewResultVO> page, String positionName,
-                                                       Integer status, Integer companyId);
+                                                       List<Integer> status, Integer companyId);
 }

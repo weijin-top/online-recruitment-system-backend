@@ -16,6 +16,7 @@ import com.weijin.recruitment.model.from.user.RegisterFrom;
 import com.weijin.recruitment.common.Result;
 import com.weijin.recruitment.model.security.SecurityUserDetails;
 import com.weijin.recruitment.service.IAuthService;
+import com.weijin.recruitment.util.CodeUtil;
 import com.weijin.recruitment.util.JwtUtil;
 import jakarta.annotation.Resource;
 import jakarta.servlet.ServletOutputStream;
@@ -60,36 +61,25 @@ public class AuthServiceImpl implements IAuthService {
     @Override
     public Result<String> login(HttpServletRequest request, LoginFrom loginFrom) {
         //判断验证码
-        String key = Constant.APPLICATION + "-code:" + request.getSession().getId();
+        String key = "%s-code:%s".formatted(Constant.APPLICATION, request.getSession().getId());
         String rightCode = redisTemplate.opsForValue().get(key);
-        if (StringUtils.isBlank(rightCode)) {
-            return Result.failed("验证码无效");
-        }
-        if (!rightCode.equalsIgnoreCase(loginFrom.getCode())) {
+        if (!CodeUtil.verityCode(rightCode,loginFrom.getCode())){
             return Result.failed("验证码错误");
         }
         // 验证码校验后redis清除验证码，避免重复使用
         redisTemplate.delete(key);
-
         // 根据用户名获取用户信息
         LambdaQueryWrapper<User> wrapper = new LambdaQueryWrapper<User>()
                 .eq(User::getUsername, loginFrom.getUsername());
         User user = userMapper.selectOne(wrapper);
-
         // 判读用户名是否存在
         if (Objects.isNull(user)) {
             return Result.failed("该用户不存在");
         }
-//        if (user.getIsDeleted() == 1) {
-//            return Result.failed("该用户已注销");
-//        }
-
         if (!passwordEncoder.matches(loginFrom.getPassword(), user.getPassword())) {
             return Result.failed("密码错误");
         }
         user.setPassword(null);
-
-
         // 生成基于角色的授权访问控制
         List<GrantedAuthority> userPermissions = AuthorityUtils
                 .commaSeparatedStringToAuthorityList(RoleEnum.getRole(user.getRoleId()));
@@ -100,15 +90,12 @@ public class AuthServiceImpl implements IAuthService {
         // 将用户信息转为字符串
         String userInfo = objectMapper.writeValueAsString(user);
         String token = jwtUtil.createJwt(userInfo, userPermissions.stream().map(String::valueOf).toList());
-        // 把token放到redis中
-//        stringRedisTemplate.opsForValue().set("token" + request.getSession().getId(), token, 30, TimeUnit.MINUTES);
+
         // 封装用户的身份信息，为后续的身份验证和授权操作提供必要的输入
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
                 new UsernamePasswordAuthenticationToken(sysUserDetails, user.getPassword(), userPermissions);
         // 用户信息存放进上下文
         SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
-        // 清除redis通过校验表示
-//        stringRedisTemplate.delete("isVerifyCode" + request.getSession().getId());
         return Result.success("登录成功", token);
     }
 
@@ -121,12 +108,9 @@ public class AuthServiceImpl implements IAuthService {
     @Override
     public Result<String> register(HttpServletRequest request,RegisterFrom registerFrom) {
         //判断验证码
-        String key = Constant.APPLICATION + "-code:" + request.getSession().getId();
+        String key = "%s-code:%s".formatted(Constant.APPLICATION, request.getSession().getId());
         String rightCode = redisTemplate.opsForValue().get(key);
-        if (StringUtils.isBlank(rightCode)) {
-            return Result.failed("验证码无效");
-        }
-        if (!rightCode.equalsIgnoreCase(registerFrom.getCode())) {
+        if (!CodeUtil.verityCode(rightCode,registerFrom.getCode())){
             return Result.failed("验证码错误");
         }
         // 验证码校验后redis清除验证码，避免重复使用
@@ -148,7 +132,7 @@ public class AuthServiceImpl implements IAuthService {
         // 把验证码存放进redis
         // 获取验证码
         String code = captcha.getCode();
-        String key = Constant.APPLICATION + "-code:" + request.getSession().getId();
+        String key = "%s-code:%s".formatted(Constant.APPLICATION, request.getSession().getId());
         redisTemplate.opsForValue().set(key, code, 5, TimeUnit.MINUTES);
         // 把图片响应到输出流
         response.setContentType("image/jpeg");

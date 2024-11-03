@@ -63,7 +63,7 @@ public interface IInterviewService extends IService<Interview> {
      * @param status       状态
      * @return 响应
      */
-    Result<IPage<InterviewResultVO>> queryInterviewResult(Integer pageNum, Integer pageSize, String positionName, Integer status);
+    Result<IPage<InterviewResultVO>> queryInterviewResult(Integer pageNum, Integer pageSize, String positionName, String status);
 
     /**
      * 根据id获取面试结果

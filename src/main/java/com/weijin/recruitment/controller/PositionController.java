@@ -54,8 +54,8 @@ public class PositionController {
     }
 
     /**
-     *
      * 根据id查询职位
+     *
      * @param id 职位id
      * @return 响应
      */
@@ -115,7 +115,8 @@ public class PositionController {
      * @param address  工作地点
      * @param type     职位类别
      * @param name     职位名称或公司名称
-     * @param status 职位状态
+     * @param status   职位状态
+     * @param orderBy 排序方式，默认0时间降序，1随机
      * @return 响应
      */
     @GetMapping("/page")
@@ -127,7 +128,8 @@ public class PositionController {
             @RequestParam(value = "address", required = false) String address,
             @RequestParam(value = "type", required = false) Integer type,
             @RequestParam(value = "name", required = false) String name,
-            @RequestParam(value = "status",required = false)Integer status) {
-        return iPositionService.pagePosition(pageNum,pageSize,edu,address,type,name,status);
+            @RequestParam(value = "status", required = false) Integer status,
+            @RequestParam(value = "orderBy", required = false, defaultValue = "0") Integer orderBy) {
+        return iPositionService.pagePosition(pageNum, pageSize, edu, address, type, name, status, orderBy);
     }
 }

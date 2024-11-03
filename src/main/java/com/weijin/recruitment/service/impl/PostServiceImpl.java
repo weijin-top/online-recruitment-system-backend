@@ -46,31 +46,34 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements IP
 
     @Override
     public Result<String> delPost(Integer id) {
-        // 获取子级id
-        LambdaQueryWrapper<Post> wrapper = new LambdaQueryWrapper<Post>()
-                .eq(Post::getParentId, id);
-        List<Post> posts = baseMapper.selectList(wrapper);
-
-        // 创建一个列表用于存储要删除的id
         List<Integer> idsToDelete = new ArrayList<>();
-
-        // 如果有子帖子，将它们的id加入到列表中
-        if (!posts.isEmpty()) {
-            idsToDelete.addAll(posts.stream()
-                    .map(Post::getId)
-                    .toList());
-        }
-
-        // 把本来需要删除的id添加到集合里
+        // 递归获取所有子级的ID
+        collectChildIds(id, idsToDelete);
         idsToDelete.add(id);
-
         // 执行批量删除
         int count = baseMapper.deleteBatchIds(idsToDelete);
-
-        // 返回操作结果
         return count > 0 ? Result.success("删除成功") : Result.failed("删除失败");
     }
 
+    /**
+     * 递归获取子级id
+     * @param parentId 父id
+     * @param idsToDelete 存储容器
+     */
+    private void collectChildIds(Integer parentId, List<Integer> idsToDelete) {
+        // 获取当前层级的所有子级
+        LambdaQueryWrapper<Post> wrapper = new LambdaQueryWrapper<Post>()
+                .eq(Post::getParentId, parentId);
+        List<Post> posts = baseMapper.selectList(wrapper);
+        if (!posts.isEmpty()) {
+            // 将这些子级的ID加入到列表中
+            for (Post post : posts) {
+                idsToDelete.add(post.getId());
+                // 递归调用以处理下一层级的子级
+                collectChildIds(post.getId(), idsToDelete);
+            }
+        }
+    }
     @Override
     public Result<String> modifyPost(ModifyPostFrom modifyPostFrom) {
         Post post = postConverter.modifyFromToEntity(modifyPostFrom);

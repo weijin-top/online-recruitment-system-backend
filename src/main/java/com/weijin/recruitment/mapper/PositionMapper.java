@@ -40,8 +40,8 @@ public interface PositionMapper extends BaseMapper<Position> {
      * @param companyId 公司id
      * @return 结果
      */
-    IPage<PositionSimpleVO> pagePosition(IPage<PositionSimpleVO> page, Integer edu, String address,
-                                         Integer type, String name, Integer status, Integer companyId);
+    IPage<PositionSimpleVO> pagePosition(IPage<PositionSimpleVO> page, Integer edu, String address, Integer type,
+                                         String name, Integer status, Integer companyId,Integer orderBy);
 
     /**
      * 查询再招职位数量

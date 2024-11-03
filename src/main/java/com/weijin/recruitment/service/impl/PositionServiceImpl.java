@@ -69,6 +69,10 @@ public class PositionServiceImpl extends ServiceImpl<PositionMapper, Position> i
 
     @Override
     public Result<String> auditPosition(Integer id, Integer status) {
+        Company company = companyMapper.selectCompanyByPositionId(id);
+        if(Objects.isNull(company) || company.getStatus() != 1){
+            return Result.failed("请先通过审核该公司，再次尝试审核该公司发布的职位");
+        }
         Position position = new Position();
         position.setId(id);
         position.setStatus(status);
@@ -98,13 +102,8 @@ public class PositionServiceImpl extends ServiceImpl<PositionMapper, Position> i
     }
 
     @Override
-    public Result<IPage<PositionSimpleVO>> pagePosition(Integer pageNum, Integer pageSize, Integer edu,
-                                                        String address, Integer type, String name, Integer status) {
-
-//        LambdaQueryWrapper<Info> infoWrapper = new LambdaQueryWrapper<Info>().eq(Info::getUserId, SecurityUtil.getUserId());
-//        Info info = infoMapper.selectOne(infoWrapper);
-
-
+    public Result<IPage<PositionSimpleVO>> pagePosition(Integer pageNum, Integer pageSize, Integer edu, String address,
+                                                        Integer type, String name, Integer status,Integer orderBy) {
         IPage<PositionSimpleVO> page = new Page<>(pageNum, pageSize);
         IPage<PositionSimpleVO> positionPage = null;
         //构建企业员工公司id参数
@@ -119,7 +118,7 @@ public class PositionServiceImpl extends ServiceImpl<PositionMapper, Position> i
             companyId = company.getId();
         }
         //查询
-        positionPage = baseMapper.pagePosition(page, edu, address, type, name,status,companyId);
+        positionPage = baseMapper.pagePosition(page, edu, address, type, name,status,companyId,orderBy);
 
         return Result.success("筛选成功", positionPage);
     }

@@ -17,6 +17,8 @@ import com.weijin.recruitment.service.IResumeDeliveryService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.weijin.recruitment.util.SecurityUtil;
 import jakarta.annotation.Resource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
@@ -83,13 +85,12 @@ public class ResumeDeliveryServiceImpl extends ServiceImpl<ResumeDeliveryMapper,
         int updated = resumeDeliveryMapper.updateById(resumeDelivery);
         return updated > 0 ? Result.success("操作成功") : Result.failed("操作失败");
     }
-
     @Override
     public Result<IPage<DeliveryInfoVO>> queryDeliveryInfo(Integer pageNum, Integer pageSize, Integer status) {
-        if (Objects.nonNull(status) && (status < 0 || status > 4)) {
-            return Result.failed("投递状态只能是1-4");
+        if (Objects.nonNull(status) && (status < 0 || status > 3)) {
+            return Result.failed("投递状态只能是0-3");
         }
-        IPage<DeliveryInfoVO> page = new Page<>(pageNum, pageSize, status);
+        IPage<DeliveryInfoVO> page = new Page<>(pageNum, pageSize);
         page = baseMapper.selectPageDeliveryInfo(page, status, SecurityUtil.getUserId());
         return Result.success("获取成功", page);
     }

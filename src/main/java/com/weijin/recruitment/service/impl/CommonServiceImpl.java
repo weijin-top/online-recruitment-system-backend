@@ -27,10 +27,10 @@ public class CommonServiceImpl implements ICommonService {
     @Override
     public Result<String> uploadImage(MultipartFile file) {
         if (!aliOSSUtil.isImage(Objects.requireNonNull(file.getOriginalFilename()))) {
-            return Result.failed("该文件不是常用图片格式(png、jpg、jpeg、bmp)");
+            return Result.failed("该文件不是常用图片格式(png、jpg、jpeg、bmp、webp、svg)");
         }
         if (aliOSSUtil.isOverSize(file)) {
-            return Result.failed("图片大小不能超过50KB");
+            return Result.failed("图片大小不能超过2MB");
         }
         String url = aliOSSUtil.upload(file);
         if (StringUtils.isBlank(url)) {

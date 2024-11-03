@@ -27,28 +27,45 @@
     </select>
     <select id="selectPageResumeDeliveryInfo"
             resultType="com.weijin.recruitment.model.vo.resumedelivery.ResumeDeliveryInfoVO">
-        select rd.id,rd.user_id,i.name,i.phone,i.email,i.address,p.name as positionName,e.level as education,rd.status
-        from t_resume_delivery as rd
-        join t_info as i on rd.user_id = i.user_id
-        join t_position as p on rd.position_id = p.id
-        join (select user_id, MAX(level) AS level
-        from t_education
-        group by user_id
-        order by level desc limit 1) as e on i.user_id = e.user_id
-        join t_company as c on p.company_id = c.id
-        <trim prefix="where" prefixOverrides="and">
-            <if test='education != null and education != 0'>
-                e.level = #{education}
-            </if>
-            <if test='positionName != null and positionName != ""'>
-                and p.name = concat('%',#{positionName},'%')
-            </if>
-            <if test='status != null'>
-                and rd.status = #{status}
-            </if>
-            and c.id = #{companyId}
-            and rd.is_deleted = 0
-        </trim>
+<!--        select rd.id,rd.user_id,i.name,i.phone,i.email,i.address,p.name as positionName,e.level as education,rd.status-->
+<!--        from t_resume_delivery as rd-->
+<!--        join t_info as i on rd.user_id = i.user_id-->
+<!--        join t_position as p on rd.position_id = p.id-->
+<!--        join (select user_id, MAX(level) AS level-->
+<!--        from t_education-->
+<!--        group by user_id-->
+<!--        order by level desc limit 1) as e on i.user_id = e.user_id-->
+<!--        join t_company as c on p.company_id = c.id-->
+<!--        <trim prefix="where" prefixOverrides="and">-->
+<!--            <if test='education != null and education != 0'>-->
+<!--                e.level = #{education}-->
+<!--            </if>-->
+<!--            <if test='positionName != null and positionName != ""'>-->
+<!--                and p.name = concat('%',#{positionName},'%')-->
+<!--            </if>-->
+<!--            <if test='status != null'>-->
+<!--                and rd.status = #{status}-->
+<!--            </if>-->
+<!--            and c.id = #{companyId}-->
+<!--            and rd.is_deleted = 0-->
+        SELECT rd.id, rd.user_id, i.name, i.phone, i.email, i.address, p.name AS positionName,
+        COALESCE((SELECT MAX(level) FROM t_education WHERE user_id = i.user_id),0) AS education, rd.status
+        FROM t_resume_delivery AS rd
+        JOIN t_info AS i ON rd.user_id = i.user_id
+        JOIN t_position AS p ON rd.position_id = p.id
+        JOIN t_company AS c ON p.company_id = c.id
+        WHERE c.id = #{companyId}
+        AND rd.is_deleted = 0
+        <if test='education!= null and education!= 0'>
+            AND COALESCE((SELECT MAX(level) FROM t_education WHERE user_id = i.user_id),0) = #{education}
+        </if>
+        <if test='positionName!= null and positionName!= ""'>
+            AND p.name LIKE CONCAT('%',#{positionName},'%')
+        </if>
+        <if test='status!= null'>
+            AND rd.status = #{status}
+        </if>
+<!--        </trim>-->
     </select>
     <select id="selectRecruiterQueryDeliveryCount"
             resultType="com.weijin.recruitment.model.vo.count.DeliveryCountVO">

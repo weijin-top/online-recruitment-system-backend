@@ -13,4 +13,10 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface CompanyMapper extends BaseMapper<Company> {
 
+    /**
+     * 根据职位id获取公司信息
+     * @param id 职位id
+     * @return 结果
+     */
+    Company selectCompanyByPositionId(Integer id);
 }

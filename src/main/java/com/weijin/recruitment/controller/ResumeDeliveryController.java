@@ -91,7 +91,7 @@ public class ResumeDeliveryController {
     public Result<IPage<DeliveryInfoVO>> queryDeliveryInfo(@RequestParam(value = "pageNum", defaultValue = "1", required = false) Integer pageNum,
                                                            @RequestParam(value = "pageSize", defaultValue = "20", required = false) Integer pageSize,
                                                            @RequestParam(value = "status", required = false) Integer status) {
-        return iResumeDeliveryService.queryDeliveryInfo(pageNum, pageNum, status);
+        return iResumeDeliveryService.queryDeliveryInfo(pageNum, pageSize, status);
     }
 
     /**

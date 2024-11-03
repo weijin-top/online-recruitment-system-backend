@@ -17,7 +17,6 @@ import com.weijin.recruitment.model.vo.interview.InterviewInfoVO;
 import com.weijin.recruitment.model.vo.interview.InterviewResultDetailVO;
 import com.weijin.recruitment.model.vo.interview.InterviewResultVO;
 import com.weijin.recruitment.model.vo.interview.InterviewVO;
-import com.weijin.recruitment.model.vo.resumedelivery.ResumeDeliveryInfoVO;
 import com.weijin.recruitment.service.IInterviewService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.weijin.recruitment.util.SecurityUtil;
@@ -25,7 +24,10 @@ import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -63,6 +65,7 @@ public class InterviewServiceImpl extends ServiceImpl<InterviewMapper, Interview
         int result = resumeDeliveryMapper.updateById(resumeDelivery);
         //保存面试邀约表
         Interview interview = interviewConverter.saveFromToEntity(saveInterviewFrom);
+        interview.setStatus(0);
         result += baseMapper.insert(interview);
         return result == 2 ? Result.success("邀约成功") : Result.failed("邀约失败");
     }
@@ -89,7 +92,7 @@ public class InterviewServiceImpl extends ServiceImpl<InterviewMapper, Interview
     }
 
     @Override
-    public Result<IPage<InterviewResultVO>> queryInterviewResult(Integer pageNum, Integer pageSize, String positionName, Integer status) {
+    public Result<IPage<InterviewResultVO>> queryInterviewResult(Integer pageNum, Integer pageSize, String positionName, String status) {
         //先获取自己的公司信息
         LambdaQueryWrapper<Company> wrapper = new LambdaQueryWrapper<Company>().eq(Company::getUserId, SecurityUtil.getUserId());
         Company company = companyMapper.selectOne(wrapper);
@@ -97,7 +100,8 @@ public class InterviewServiceImpl extends ServiceImpl<InterviewMapper, Interview
             return Result.failed("请先完善企业信息");
         }
         IPage<InterviewResultVO> page = new Page<>(pageNum, pageSize);
-        page = baseMapper.selectPageInterviewResult(page, positionName, status, company.getId());
+        List<Integer> list = Arrays.stream(status.split(",")).map(Integer::parseInt).toList();
+        page = baseMapper.selectPageInterviewResult(page, positionName, list, company.getId());
         return Result.success("获取查询成功", page);
     }
 

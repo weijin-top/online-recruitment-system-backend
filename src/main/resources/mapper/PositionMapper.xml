@@ -54,7 +54,7 @@
                 and ps.type = #{type}
             </if>
             <if test='name != null and name != ""'>
-                and ps.name like concat('%',#{name},'%') or c.name like concat('%',#{name},'%')
+                and (ps.name like concat('%',#{name},'%') or c.name like concat('%',#{name},'%'))
             </if>
             <if test="status != null">
                 and ps.status = #{status}
@@ -64,11 +64,18 @@
             </if>
             and ps.is_deleted = 0
         </trim>
-        order by ps.create_time desc
+        <if test="orderBy == 0">
+            order by ps.create_time desc
+        </if>
+       <if test="orderBy == 1">
+           order by rand()
+       </if>
+
     </select>
     <select id="selectOpenPosition" resultType="java.lang.Integer">
         select sum(number) from t_position where status = 1
     </select>
+
     <select id="selectStatEdu" resultType="com.weijin.recruitment.model.vo.count.EduCountVO">
         select
         sum(case when education &lt;= 4 then 1 else 0 end ) as juniorCollegeAndBelowCount,
@@ -77,6 +84,7 @@
         sum(case when education = 7 then 1 else 0 end ) as doctorCount
         from t_position where status = 1 and is_deleted = 0
     </select>
+
     <select id="selectStatPosition" resultType="com.weijin.recruitment.model.vo.count.PositionMonthCountVO">
         SELECT
             m.month,
@@ -85,7 +93,7 @@
             (
            <!-- 生成最近六个月的所有月份 -->
             SELECT
-            DATE_FORMAT(DATE_ADD(CURRENT_DATE(), INTERVAL -6 + n.n MONTH), '%Y-%m') AS month
+            DATE_FORMAT(DATE_ADD(CURRENT_DATE(), INTERVAL -5 + n.n MONTH), '%Y-%m') AS month
             FROM
             (
             SELECT 0 AS n
@@ -105,7 +113,7 @@
             FROM
             t_position
             WHERE
-            create_time >= DATE_SUB(CURRENT_DATE(), INTERVAL 6 MONTH)
+            create_time >= DATE_SUB(CURRENT_DATE(), INTERVAL 6 MONTH) and status = 1
             GROUP BY
             DATE_FORMAT(create_time, '%Y-%m')
             ) c ON m.month = c.month

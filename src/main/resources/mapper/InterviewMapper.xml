@@ -22,11 +22,24 @@
             <if test='positionName != null and positionName != ""'>
                 and p.name = concat('%',#{positionName},'%')
             </if>
-            <if test='status != null'>
-                and rd.status = #{status}
-            </if>
+            and iv.status in
+            <foreach collection="status" open="(" close=")" separator="," item="i">
+                #{i}
+            </foreach>
+            <!--            <choose>-->
+            <!--                <when test="status != null">-->
+            <!--                    and iv.status = #{status}-->
+            <!--                </when>-->
+            <!--                <otherwise>-->
+            <!--                    and iv.status in -->
+            <!--                    <foreach collection="status" open="(" close=")" separator="," item="i">-->
+            <!--                     i-->
+            <!--                    </foreach>-->
+            <!--                   -->
+            <!--                </otherwise>-->
+            <!--            </choose>-->
             and c.id = #{companyId}
-            and rd.is_deleted = 0
+            and iv.is_deleted = 0
         </trim>
     </select>
 </mapper>

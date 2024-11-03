@@ -19,6 +19,5 @@
         <collection property="postVOS" autoMapping="true" column="id"
                     ofType="com.weijin.recruitment.model.vo.post.PostVO"
                     select="com.weijin.recruitment.mapper.PostMapper.selectChildPosts"/>
-
     </resultMap>
 </mapper>

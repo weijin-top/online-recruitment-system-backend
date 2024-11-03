@@ -60,17 +60,17 @@ public class AliOSSUtil {
      */
     public boolean isImage(String filename) {
         String lastName = filename.substring(filename.lastIndexOf(".") + 1);
-        String[] lastnames = {"png", "jpg", "jpeg", "bmp"};
+        String[] lastnames = {"png", "jpg", "jpeg", "bmp", "webp", "svg"};
         return Arrays.asList(lastnames).contains(lastName);
     }
 
     /**
-     * 判断文件是否大于50KB
+     * 判断文件是否大于2MB
      *
      * @param file 文件
      * @return 结果
      */
     public boolean isOverSize(MultipartFile file) {
-        return file.getSize() > 20 * 1024 * 1024;
+        return file.getSize() > 2 * 1024 * 1024;
     }
 }
