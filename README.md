@@ -3,7 +3,7 @@
 ### online-recruitment-system-backend
 
 
-### 项目演示地址 [项目演示地址](https://www.bilibili.com/video/BV1tYPUeJEaF/)
+### 项目演示地址   [bilibili演示地址](https://www.bilibili.com/video/BV1tYPUeJEaF/)
 ### 前端地址  [前端地址](https://github.com/weijin-top/online-recruitment-system-frontend)
 
 ### 项目展示
