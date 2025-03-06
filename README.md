@@ -46,7 +46,8 @@
  QQ： 3413105907
 
 #### 功能结构图
-![输入图片说明](image%E5%9C%A8%E7%BA%BF%E6%B1%82%E8%81%8C%E6%8B%9B%E8%81%98%E7%B3%BB%E7%BB%9F-%E5%8A%9F%E8%83%BD%E7%BB%93%E6%9E%84%E5%9B%BE.png)
+![在线求职招聘系统-功能结构图](https://github.com/user-attachments/assets/c9417086-0629-42fa-834b-61c37e586aaf)
+
 
 
 ### 项目展示
@@ -54,7 +55,8 @@
 
 #### 管理员
 
-![输入图片说明](https://foruda.gitee.com/images/1740993185425522503/dd4b2b62_13366917.png "屏幕截图")
+![管理员-首页](https://github.com/user-attachments/assets/5ae522e3-6246-4d01-bf95-5d5d6ca41a10)
+
 
 ![输入图片说明](https://foruda.gitee.com/images/1740993240827518031/eb269100_13366917.png "屏幕截图")
 
@@ -62,7 +64,8 @@
 
 #### 招聘者
 
-![输入图片说明](https://foruda.gitee.com/images/1740993300165808457/2304547c_13366917.png "屏幕截图")
+![招聘者-处理简历](https://github.com/user-attachments/assets/2479f2ec-eb28-49b2-b8db-11119421fde4)
+
 
 ![输入图片说明](https://foruda.gitee.com/images/1740993312844387883/af19a266_13366917.png "屏幕截图")
 
@@ -70,12 +73,16 @@
 
 #### 求职者
 
-![输入图片说明](https://foruda.gitee.com/images/1740993348114849960/d23830fb_13366917.png "屏幕截图")
+![求职者-简历预览](https://github.com/user-attachments/assets/14eb64f7-15be-4020-b8ef-5be26f98b415)
 
-![输入图片说明](https://foruda.gitee.com/images/1740993357966736095/b021120c_13366917.png "屏幕截图")
 
-![输入图片说明](https://foruda.gitee.com/images/1740993378725512661/9b5e02be_13366917.png "屏幕截图")
+![求职者-首页](https://github.com/user-attachments/assets/76a86bee-3123-45e2-ad8d-26390933b7b1)
 
-![输入图片说明](https://foruda.gitee.com/images/1740993398278943093/0288405f_13366917.png "屏幕截图")
 
-![输入图片说明](https://foruda.gitee.com/images/1740993408689797376/dc3672a0_13366917.png "屏幕截图")
+![求职者-投递箱](https://github.com/user-attachments/assets/7e92312d-6185-4e42-9e32-6b165aa1a6b7)
+
+
+![求职者-查看面试结果](https://github.com/user-attachments/assets/ab0781a1-084c-41c1-a3dd-ba031712aed0)
+
+
+![求职者-我的面试](https://github.com/user-attachments/assets/0797bdfe-83b1-4aea-8b70-702966749c5c)
