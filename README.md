@@ -4,6 +4,7 @@
 
 #### 友情提示
 > 1.**项目演示地址**: [bilibili演示地址](https://www.bilibili.com/video/BV1tYPUeJEaF/)
+
 > 2.**前端仓库地址**：[配套项目前端地址](https://gitee.com/weijin-top/online-recruitment-system-frontend.git)
 
 #### 介绍
@@ -14,6 +15,8 @@
 
 ##### 温馨提示
 1.我会给两个SQL文件，一个是仅有结构，另一个包括结构和数据，如果使用包含数据的SQL脚本文件，里面用户表的所有密码均为**123456**
+2.如果使用含数据的SQL脚本，图片可能无法正确展示
+
 
 #### 安装
 
@@ -37,14 +40,14 @@
 | MySQL | 8.0.36 | https://downloads.mysql.com/archives/installer/            |
 | Redis | 7.0    | https://redis.io/download                                  |
 
-#### 功能结构图
-![输入图片说明](image%E5%9C%A8%E7%BA%BF%E6%B1%82%E8%81%8C%E6%8B%9B%E8%81%98%E7%B3%BB%E7%BB%9F-%E5%8A%9F%E8%83%BD%E7%BB%93%E6%9E%84%E5%9B%BE.png)
-
 #### 联系方式
 
 微信：18784876446
-
 QQ： 3413105907
+
+#### 功能结构图
+![输入图片说明](image%E5%9C%A8%E7%BA%BF%E6%B1%82%E8%81%8C%E6%8B%9B%E8%81%98%E7%B3%BB%E7%BB%9F-%E5%8A%9F%E8%83%BD%E7%BB%93%E6%9E%84%E5%9B%BE.png)
+
 
 ### 项目展示
 
