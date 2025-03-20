@@ -4,7 +4,7 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
-    password: XXXXXXXXXXXXXXXXXXXXXXXXXX
+    password: XXXXXXXXXXXXX
     url: jdbc:mysql://localhost:3306/db_recruitment?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8
   jackson:
     serialization:
@@ -13,7 +13,7 @@ spring:
     redis:
       database: 0
       host: localhost
-      password: XXXXXXXXXXXXXXXXXXXXXXXXXX
+      password: XXXXXXXXXXXXXXXXX
       port: 6379
       timeout: 10s
       lettuce:
@@ -40,8 +40,21 @@ jwt:
   secret: aofklasndflkasndkasherwlansldkgnflks6fas56f4a9sfasfhsjfhwi3435w3223423424
   expire-time: 259200000
 
+# 阿里云OSS对象存储
 oss:
-  endpoint: https://oss-cn-chengdu.aliyuncs.com
-  access-key-id: LTAI5tKecua1aNm9ct9oQv5i
-  access-key-secret: uvbcaDGv6oontUjEVuM1RcfPJ66tpg
-  bucket-name: online-recruitment-system
+  endpoint:XXXXXXXXXXXXXXXXX
+  access-key-id: XXXXXXXXXXXXXXXXX
+  access-key-secret: XXXXXXXXXXXXXXXXX
+  bucket-name: XXXXXXXXXXXXXXXXX
+
+#本地对象存储
+minio:
+  endpoint: XXXXXXXXXXXXXXXXX
+  access-key: XXXXXXXXXXXXXXXXX
+  secret-key: XXXXXXXXXXXXXXXXX
+  bucket-name: XXXXXXXXXXXXXXXXX
+
+#配置图片存储方式
+recruitment:
+  storage:
+    type: aliyun #配置存储方式可选 aliyun、minio
