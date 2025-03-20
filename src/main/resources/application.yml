@@ -40,8 +40,21 @@ jwt:
   secret: aofklasndflkasndkasherwlansldkgnflks6fas56f4a9sfasfhsjfhwi3435w3223423424
   expire-time: 259200000
 
+# 阿里云OSS对象存储
 oss:
   endpoint: XXXXXXXXXXXXXXX
   access-key-id: XXXXXXXXXXXXXXXXXX
   access-key-secret: XXXXXXXXXXXXXXXXXXXXXXXXXX
   bucket-name: XXXXXXXXXXXXXXXXXXXXXX
+
+#本地对象存储
+minio:
+  endpoint: XXXXXXXXXXXXXXXXX
+  access-key: XXXXXXXXXXXXXXXXX
+  secret-key: XXXXXXXXXXXXXXXXX
+  bucket-name: XXXXXXXXXXXXXXXXX
+
+#配置图片存储方式
+recruitment:
+  storage:
+    type: aliyun #配置存储方式可选 aliyun、minio

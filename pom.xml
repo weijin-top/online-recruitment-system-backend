@@ -222,13 +222,6 @@
         <!--            <artifactId>spring-session-data-redis</artifactId>-->
         <!--        </dependency>-->
 
-
-        <!-- mybatis-plus-generator -->
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-generator</artifactId>
-            <version>3.3.2</version>
-        </dependency>
         <!-- freemarker模板 -->
         <dependency>
             <groupId>org.freemarker</groupId>
@@ -240,11 +233,17 @@
             <artifactId>velocity-engine-core</artifactId>
             <version>2.1</version>
         </dependency>
-
+        <!-- mybatis-plus-generator -->
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-generator</artifactId>
             <version>3.5.7</version>
+        </dependency>
+        <!--minio 本地对象存储-->
+        <dependency>
+            <groupId>io.minio</groupId>
+            <artifactId>minio</artifactId>
+            <version>8.5.10</version>
         </dependency>
     </dependencies>
 

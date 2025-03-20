@@ -1,13 +1,17 @@
-package com.weijin.recruitment.util;
+package com.weijin.recruitment.util.FileUtil;
 
+import cn.hutool.core.date.DateUtil;
 import com.aliyun.oss.OSS;
 import com.aliyun.oss.OSSClientBuilder;
+import com.weijin.recruitment.exception.AppException;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.UUID;
 
@@ -16,7 +20,8 @@ import java.util.UUID;
  * @version 1.0
  */
 @Component
-public class AliOSSUtil {
+@ConditionalOnProperty(name = "recruitment.storage.type", havingValue = "aliyun")
+public class AliOSSUtil implements IFileUtil {
 
     @Value("${oss.endpoint}")
     private String endpoint;
@@ -30,21 +35,28 @@ public class AliOSSUtil {
     /**
      * 实现上传图片到OSS
      */
-    public String upload(MultipartFile file) throws IOException {
+    @Override
+    public String upload(MultipartFile file) {
         // 获取上传的文件的输入流
-        InputStream inputStream = file.getInputStream();
+        InputStream inputStream = null;
+        try {
+            inputStream = file.getInputStream();
+        } catch (IOException e) {
+            throw new AppException("获取文件输入流失败");
+        }
 
         // 避免文件覆盖
         String originalFilename = file.getOriginalFilename();
         assert originalFilename != null : "上传文件时获取文件名失败，为null";
-        String fileName = UUID.randomUUID() + originalFilename.substring(originalFilename.lastIndexOf("."));
+        String fileName = DateUtil.format(LocalDateTime.now(), "yyyyMMdd") + "/" + UUID.randomUUID() +
+                originalFilename.substring(originalFilename.lastIndexOf("."));
 
-        //上传文件到 OSS
+        // 上传文件到 OSS
         OSS ossClient = new OSSClientBuilder().build(endpoint, accessKeyId, accessKeySecret);
-        ossClient.putObject(bucketName,  "recruitment/" +fileName, inputStream);
+        ossClient.putObject(bucketName, "recruitment/" + fileName, inputStream);
 
-        //文件访问路径
-        String url = /*endpoint.split("//")[0] + "//" + bucketName + "." + endpoint.split("//")[1] +"/"+*/ "recruitment/" + fileName;
+        // 文件访问路径
+        String url = "recruitment/" + fileName;
         // 关闭ossClient
         ossClient.shutdown();
         // 把上传到oss的路径返回
@@ -58,6 +70,7 @@ public class AliOSSUtil {
      * @param filename 文件名
      * @return 结果
      */
+    @Override
     public boolean isImage(String filename) {
         String lastName = filename.substring(filename.lastIndexOf(".") + 1);
         String[] lastnames = {"png", "jpg", "jpeg", "bmp", "webp", "svg"};
@@ -70,6 +83,7 @@ public class AliOSSUtil {
      * @param file 文件
      * @return 结果
      */
+    @Override
     public boolean isOverSize(MultipartFile file) {
         return file.getSize() > 2 * 1024 * 1024;
     }
