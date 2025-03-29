@@ -50,7 +50,7 @@ QQ： 3413105907
 
 #### 功能结构图
 
-![输入图片说明](https://gitee.com/weijin-top/online-recruitment-system-backend/blob/master/image/function/在线求职招聘系统-功能结构图.png)
+![输入图片说明](https://gitee.com/weijin-top/online-recruitment-system-backend/raw/master/image/function/在线求职招聘系统-功能结构图.png)
 
 ### 项目展示
 
@@ -65,7 +65,7 @@ QQ： 3413105907
 #### 招聘者
 
 ![输入图片说明](https://foruda.gitee.com/images/1740993300165808457/2304547c_13366917.png "屏幕截图")
-![输入图片说明](https://gitee.com/weijin-top/online-recruitment-system-backend/tree/master/image/printscreen/求职者_招聘者-聊天.png)
+![输入图片说明](https://gitee.com/weijin-top/online-recruitment-system-backend/raw/master/image/printscreen/求职者_招聘者-聊天.png)
 
 ![输入图片说明](https://foruda.gitee.com/images/1740993312844387883/af19a266_13366917.png "屏幕截图")
 
