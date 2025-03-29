@@ -19,7 +19,7 @@
 3. **配置文件application.yml文件中 “XXXXXXXXXXXXX”一定要改为自己正确的**
 4. 本项目配置了minio本地存储和OSS阿里云存储，**建议使用minio存储**，需**先安装minio到本地**，网上有许多教程，再**访问minio web网页创建一个新的Bucket**，接着**创建Access Keys**
    ,最后**配置修改配置文件minio信息**
-5. 注意：使用了minio本地存储图片，页面中的图片无法显示，需要在将数据库图片地址修改为自己上传到minio上的地址，数据库只需要recruitment后面的地址(包含recruitment/及前面的地址都不需要，因为前端做了图片代理)
+5. 注意：使用了minio本地存储图片，页面中的图片无法显示，需要在将数据库图片地址修改为自己上传到minio上的地址，数据库只需要recruitment后面的地址(包含recruitment/，因为前端做了图片代理)
 
 #### 安装
 
