@@ -114,7 +114,10 @@ public class WebsocketHandler {
             if (Objects.nonNull(socket) && !Objects.equals(socket.getRoleId(), ownerRoleId)
                     && socket.getSession().isOpen()) {
                 try {
-                    socket.getSession().getBasicRemote().sendText(finalJsonStrOnlineUsers);
+                    // 加锁，保证同时只有一个线程在使用websocket发送信息
+                    synchronized (this) {
+                        socket.getSession().getBasicRemote().sendText(finalJsonStrOnlineUsers);
+                    }
                 } catch (IOException e) {
                     throw new AppException("发送在线用户列表失败");
                 }
@@ -138,7 +141,10 @@ public class WebsocketHandler {
         result.setData(onlineUsers);
         try {
             String jsonStrOnlineUser = objectMapper.writeValueAsString(result);
-            session.getBasicRemote().sendText(jsonStrOnlineUser);
+            // 加锁，保证同时只有一个线程在使用websocket发送信息
+            synchronized (this) {
+                session.getBasicRemote().sendText(jsonStrOnlineUser);
+            }
             log.info("[websocket信息]: 发送单点信息：{}", jsonStrOnlineUser);
         } catch (Exception e) {
             throw new AppException("发送在线用户列表失败");
@@ -218,7 +224,10 @@ public class WebsocketHandler {
         Session receiverSession = receiverSocketSession.getSession();
         if (receiverSession.isOpen()) {
             try {
-                receiverSession.getBasicRemote().sendText(res);
+                // 加锁，保证同时只有一个线程在使用websocket发送信息
+                synchronized (this) {
+                    receiverSession.getBasicRemote().sendText(res);
+                }
             } catch (IOException e) {
                 throw new AppException("发送单点信息失败");
             }

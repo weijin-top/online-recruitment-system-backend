@@ -4,7 +4,7 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
-    password: XXXXXXXXXXXXXXXXXXXXXXXX
+    password: XXXXXXXXXXXXXXXXXXXXX
     url: jdbc:mysql://localhost:3306/db_recruitment?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8
   jackson:
     serialization:
@@ -13,7 +13,7 @@ spring:
     redis:
       database: 0
       host: localhost
-      password: XXXXXXXXXXXXXXXXXXXXXXXX
+      password: XXXXXXXXXXXXXXXXXXXXX
       port: 6379
       timeout: 10s
       lettuce:
@@ -42,17 +42,17 @@ jwt:
 
 # 阿里云OSS对象存储
 oss:
-  endpoint: XXXXXXXXXXXXXXXXXXXXXXXX
-  access-key-id: XXXXXXXXXXXXXXXXXXXXXXXX
-  access-key-secret: XXXXXXXXXXXXXXXXXXXXXXXX
-  bucket-name: XXXXXXXXXXXXXXXXXXXXXXXX
+  endpoint: XXXXXXXXXXXXXXXXXXXXX
+  access-key-id: XXXXXXXXXXXXXXXXXXXXX
+  access-key-secret: XXXXXXXXXXXXXXXXXXXXX
+  bucket-name: XXXXXXXXXXXXXXXXXXXXX
 
 #本地对象存储
 minio:
-  endpoint: XXXXXXXXXXXXXXXXXXXXXXXX
-  access-key: XXXXXXXXXXXXXXXXXXXXXXXX
-  secret-key: XXXXXXXXXXXXXXXXXXXXXXXX
-  bucket-name: XXXXXXXXXXXXXXXXXXXXXXXX
+  endpoint: XXXXXXXXXXXXXXXXXXXXX
+  access-key: XXXXXXXXXXXXXXXXXXXXX
+  secret-key: XXXXXXXXXXXXXXXXXXXXX
+  bucket-name: XXXXXXXXXXXXXXXXXXXXX
 
 #配置图片存储方式
 recruitment:
