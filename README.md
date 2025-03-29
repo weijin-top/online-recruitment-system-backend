@@ -65,7 +65,7 @@ QQ： 3413105907
 #### 招聘者
 
 ![输入图片说明](https://foruda.gitee.com/images/1740993300165808457/2304547c_13366917.png "屏幕截图")
-![输入图片说明](https://gitee.com/weijin-top/online-recruitment-system-backend/tree/master/image/界面截图/求职者_招聘者-聊天.png)
+![输入图片说明](https://gitee.com/weijin-top/online-recruitment-system-backend/blob/master/image/%E7%95%8C%E9%9D%A2%E6%88%AA%E5%9B%BE/%E6%B1%82%E8%81%8C%E8%80%85_%E6%8B%9B%E8%81%98%E8%80%85-%E8%81%8A%E5%A4%A9.png)
 
 ![输入图片说明](https://foruda.gitee.com/images/1740993312844387883/af19a266_13366917.png "屏幕截图")
 
