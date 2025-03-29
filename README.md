@@ -65,6 +65,7 @@
 #### 招聘者
 
 ![输入图片说明](https://foruda.gitee.com/images/1740993300165808457/2304547c_13366917.png "屏幕截图")
+![输入图片说明](imgchat.png)
 
 ![输入图片说明](https://foruda.gitee.com/images/1740993312844387883/af19a266_13366917.png "屏幕截图")
 
