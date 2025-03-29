@@ -56,29 +56,30 @@ QQ： 3413105907
 
 #### 管理员
 
-![输入图片说明](https://foruda.gitee.com/images/1740993185425522503/dd4b2b62_13366917.png "屏幕截图")
+![管理员-首页](https://gitee.com/weijin-top/online-recruitment-system-backend/raw/master/image/printscreen/管理员-首页.png)
 
-![输入图片说明](https://foruda.gitee.com/images/1740993240827518031/eb269100_13366917.png "屏幕截图")
+![管理员-企业审核-审核通过](https://gitee.com/weijin-top/online-recruitment-system-backend/raw/master/image/printscreen/管理员-企业审核-审核通过.png)
 
-![输入图片说明](https://foruda.gitee.com/images/1740993255338168977/cb684ecf_13366917.png "屏幕截图")
+![管理员-职位类别管理](https://gitee.com/weijin-top/online-recruitment-system-backend/raw/master/image/printscreen/管理员-职位类别管理.png)
 
 #### 招聘者
 
-![输入图片说明](https://foruda.gitee.com/images/1740993300165808457/2304547c_13366917.png "屏幕截图")
-![输入图片说明](https://gitee.com/weijin-top/online-recruitment-system-backend/raw/master/image/printscreen/求职者_招聘者-聊天.png)
+![招聘者-处理简历](https://gitee.com/weijin-top/online-recruitment-system-backend/raw/master/image/printscreen/招聘者-处理简历.png)
 
-![输入图片说明](https://foruda.gitee.com/images/1740993312844387883/af19a266_13366917.png "屏幕截图")
+![求职者_招聘者-聊天](https://gitee.com/weijin-top/online-recruitment-system-backend/raw/master/image/printscreen/求职者_招聘者-聊天.png)
 
-![输入图片说明](https://foruda.gitee.com/images/1740993323767628636/2c07296d_13366917.png "屏幕截图")
+![招聘者-面试管理-未处理](https://gitee.com/weijin-top/online-recruitment-system-backend/raw/master/image/printscreen/招聘者-面试管理-未处理.png)
+
+![招聘者-投递管理](https://gitee.com/weijin-top/online-recruitment-system-backend/raw/master/image/printscreen/招聘者-投递管理.png)
 
 #### 求职者
 
-![输入图片说明](https://foruda.gitee.com/images/1740993348114849960/d23830fb_13366917.png "屏幕截图")
+![求职者-简历预览](https://gitee.com/weijin-top/online-recruitment-system-backend/raw/master/image/printscreen/求职者-简历预览.png)
 
-![输入图片说明](https://foruda.gitee.com/images/1740993357966736095/b021120c_13366917.png "屏幕截图")
+![求职者-首页](https://gitee.com/weijin-top/online-recruitment-system-backend/raw/master/image/printscreen/求职者-首页.png)
 
-![输入图片说明](https://foruda.gitee.com/images/1740993378725512661/9b5e02be_13366917.png "屏幕截图")
+![求职者-投递箱](https://gitee.com/weijin-top/online-recruitment-system-backend/raw/master/image/printscreen/求职者-投递箱.png)
 
-![输入图片说明](https://foruda.gitee.com/images/1740993398278943093/0288405f_13366917.png "屏幕截图")
+![求职者-我的面试](https://gitee.com/weijin-top/online-recruitment-system-backend/raw/master/image/printscreen/求职者-我的面试.png)
 
-![输入图片说明](https://foruda.gitee.com/images/1740993408689797376/dc3672a0_13366917.png "屏幕截图")
+![求职者-查看面试结果](https://gitee.com/weijin-top/online-recruitment-system-backend/raw/master/image/printscreen/求职者-查看面试结果.png)
