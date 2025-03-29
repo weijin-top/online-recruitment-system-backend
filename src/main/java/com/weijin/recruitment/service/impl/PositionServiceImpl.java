@@ -16,7 +16,7 @@ import com.weijin.recruitment.model.vo.position.PositionSimpleVO;
 import com.weijin.recruitment.model.vo.position.PositionVO;
 import com.weijin.recruitment.service.IPositionService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.weijin.recruitment.util.SecurityUtil;
+import com.weijin.recruitment.utils.SecurityUtil;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
@@ -70,7 +70,7 @@ public class PositionServiceImpl extends ServiceImpl<PositionMapper, Position> i
     @Override
     public Result<String> auditPosition(Integer id, Integer status) {
         Company company = companyMapper.selectCompanyByPositionId(id);
-        if(Objects.isNull(company) || company.getStatus() != 1){
+        if (Objects.isNull(company) || company.getStatus() != 1) {
             return Result.failed("请先通过审核该公司，再次尝试审核该公司发布的职位");
         }
         Position position = new Position();
@@ -91,7 +91,7 @@ public class PositionServiceImpl extends ServiceImpl<PositionMapper, Position> i
 
     @Override
     public Result<PositionDetailVO> querySinge(Integer id) {
-        PositionDetailVO positionDetailVO = baseMapper.selectPositionDetailById(id,SecurityUtil.getUserId());
+        PositionDetailVO positionDetailVO = baseMapper.selectPositionDetailById(id, SecurityUtil.getUserId());
         if (Objects.isNull(positionDetailVO)) {
             return Result.failed("岗位不存在，或岗位已被删除");
         }
@@ -103,22 +103,22 @@ public class PositionServiceImpl extends ServiceImpl<PositionMapper, Position> i
 
     @Override
     public Result<IPage<PositionSimpleVO>> pagePosition(Integer pageNum, Integer pageSize, Integer edu, String address,
-                                                        Integer type, String name, Integer status,Integer orderBy) {
+                                                        Integer type, String name, Integer status, Integer orderBy) {
         IPage<PositionSimpleVO> page = new Page<>(pageNum, pageSize);
         IPage<PositionSimpleVO> positionPage = null;
-        //构建企业员工公司id参数
+        // 构建企业员工公司id参数
         Integer companyId = null;
-        if(Objects.equals(SecurityUtil.getRole(), RoleEnum.getRole(2))){
+        if (Objects.equals(SecurityUtil.getRole(), RoleEnum.getRole(2))) {
             LambdaQueryWrapper<Company> wrapper = new LambdaQueryWrapper<Company>()
                     .eq(Company::getUserId, SecurityUtil.getUserId());
             Company company = companyMapper.selectOne(wrapper);
-            if (Objects.isNull(company)){
+            if (Objects.isNull(company)) {
                 return Result.failed("你还没有认证企业，暂无数据");
             }
             companyId = company.getId();
         }
-        //查询
-        positionPage = baseMapper.pagePosition(page, edu, address, type, name,status,companyId,orderBy);
+        // 查询
+        positionPage = baseMapper.pagePosition(page, edu, address, type, name, status, companyId, orderBy);
 
         return Result.success("筛选成功", positionPage);
     }
@@ -126,11 +126,11 @@ public class PositionServiceImpl extends ServiceImpl<PositionMapper, Position> i
     @Override
     public Result<PositionVO> queryPositionById(Integer id) {
         Position position = baseMapper.selectById(id);
-        if (Objects.isNull(position)){
+        if (Objects.isNull(position)) {
             return Result.failed("该职位不存在");
         }
         PositionVO positionVO = positionConverter.entityToVO(position);
-        return Result.success("查询成功",positionVO);
+        return Result.success("查询成功", positionVO);
     }
 
 

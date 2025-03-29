@@ -15,7 +15,7 @@ import java.util.List;
  * @Date 2024/7/2 17:56
  */
 @Component
-@Mapper(componentModel="spring")
+@Mapper(componentModel = "spring")
 public interface PostConverter {
 
     Post fromToEntity(PostFrom postFrom);

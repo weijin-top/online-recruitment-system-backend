@@ -116,14 +116,14 @@ public class PositionController {
      * @param type     职位类别
      * @param name     职位名称或公司名称
      * @param status   职位状态
-     * @param orderBy 排序方式，默认0时间降序，1随机
+     * @param orderBy  排序方式，默认0时间降序，1随机
      * @return 响应
      */
     @GetMapping("/page")
     @PreAuthorize("hasAnyRole('seeker','recruiter','admin')")
     public Result<IPage<PositionSimpleVO>> pagePosition(
             @RequestParam(value = "pageNum", required = false, defaultValue = "1") Integer pageNum,
-            @RequestParam(value = "pageSize", required = false, defaultValue = "20") Integer pageSize,
+            @RequestParam(value = "pageSize", required = false, defaultValue = "18") Integer pageSize,
             @RequestParam(value = "edu", required = false) Integer edu,
             @RequestParam(value = "address", required = false) String address,
             @RequestParam(value = "type", required = false) Integer type,

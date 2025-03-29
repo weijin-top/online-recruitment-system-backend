@@ -1,4 +1,4 @@
-package com.weijin.recruitment.util.FileUtil;
+package com.weijin.recruitment.utils.fileUtils;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 public interface IFileUtil {
     /**
      * 文件上传
+     *
      * @param file 文件
      * @return 返回文件路径
      */

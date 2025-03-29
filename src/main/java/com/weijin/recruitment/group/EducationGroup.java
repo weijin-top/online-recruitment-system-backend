@@ -6,6 +6,9 @@ package com.weijin.recruitment.group;
  * @Date 2024/7/4 18:17
  */
 public interface EducationGroup {
-    interface SaveEducationGroup extends EducationGroup{}
-    interface ModifyEducationGroup extends EducationGroup{}
+    interface SaveEducationGroup extends EducationGroup {
+    }
+
+    interface ModifyEducationGroup extends EducationGroup {
+    }
 }

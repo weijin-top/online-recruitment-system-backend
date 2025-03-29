@@ -22,6 +22,6 @@ public interface CompanyConverter {
 
     Page<CompanyVO> entityPageToVO(IPage<Company> page);
 
-    @Mapping(source = "nickname",target = "nickname")
+    @Mapping(source = "nickname", target = "nickname")
     CompanyVO entityToVO(Company company);
 }

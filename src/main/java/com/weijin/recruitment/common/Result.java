@@ -23,20 +23,22 @@ public class Result<T> implements Serializable {
         return success(null);
     }
 
-    public static <T> Result<T> success(String msg,T data) {
-        return result(1,msg,data);
+    public static <T> Result<T> success(String msg, T data) {
+        return result(1, msg, data);
     }
 
     public static <T> Result<T> success(String msg) {
-        return result(1,msg,null);
+        return result(1, msg, null);
     }
 
     public static <T> Result<T> failed(String msg) {
-        return result(0,msg , null);
+        return result(0, msg, null);
     }
-    public static <T> Result<T> failed(Integer code,String msg) {
-        return result(code,msg , null);
+
+    public static <T> Result<T> failed(Integer code, String msg) {
+        return result(code, msg, null);
     }
+
     private static <T> Result<T> result(Integer code, String msg, T data) {
         Result<T> result = new Result<>();
         result.setCode(code);

@@ -19,5 +19,5 @@ public class PageQuery {
     private Integer pageNum = 1;
     private Integer pageSize = 20;
     @Nullable
-    private HashMap<String,Object> params;
+    private HashMap<String, Object> params;
 }

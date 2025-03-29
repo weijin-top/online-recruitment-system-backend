@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  * <p>
- *  Mapper 接口
+ * Mapper 接口
  * </p>
  *
  * @author WeiJin
@@ -20,7 +20,8 @@ public interface InterviewMapper extends BaseMapper<Interview> {
 
     /**
      * 分页获取某个用户的面试
-     * @param page 分页信息
+     *
+     * @param page   分页信息
      * @param userId 用户id
      * @return 结果
      */
@@ -28,10 +29,11 @@ public interface InterviewMapper extends BaseMapper<Interview> {
 
     /**
      * 根据公司id分页获取面试信息
-     * @param page 分页信息
+     *
+     * @param page         分页信息
      * @param positionName 职位名称
-     * @param status 状态
-     * @param companyId 公司id
+     * @param status       状态
+     * @param companyId    公司id
      * @return 结果
      */
     IPage<InterviewResultVO> selectPageInterviewResult(IPage<InterviewResultVO> page, String positionName,

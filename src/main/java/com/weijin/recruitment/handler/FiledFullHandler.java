@@ -1,8 +1,8 @@
 package com.weijin.recruitment.handler;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
-import com.weijin.recruitment.util.DateTimeUtil;
-import com.weijin.recruitment.util.SecurityUtil;
+import com.weijin.recruitment.utils.DateTimeUtil;
+import com.weijin.recruitment.utils.SecurityUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.reflection.MetaObject;
 import org.springframework.stereotype.Component;
@@ -24,20 +24,20 @@ import java.util.Objects;
 public class FiledFullHandler implements MetaObjectHandler {
     @Override
     public void insertFill(MetaObject metaObject) {
-        //没有创建人id就给他自动填充 放属性名而不是字段名
+        // 没有创建人id就给他自动填充 放属性名而不是字段名
         Class<?> clazz = metaObject.getOriginalObject().getClass();
         Field[] fields = clazz.getDeclaredFields();
         Arrays.stream(fields).forEach(field -> {
-            //填充创建人
+            // 填充创建人
             if ("userId".equals(field.getName()) && (Objects.isNull(getFieldValByName("userId", metaObject)))) {
-                    log.info("user_id字段满足公共字段自动填充规则，已填充");
-                    this.strictInsertFill(metaObject, "userId", Integer.class, SecurityUtil.getUserId());
+                log.info("user_id字段满足公共字段自动填充规则，已填充");
+                this.strictInsertFill(metaObject, "userId", Integer.class, SecurityUtil.getUserId());
 
             }
-            //填充创建时间
+            // 填充创建时间
             if ("createTime".equals(field.getName()) && (Objects.isNull(getFieldValByName("createTime", metaObject)))) {
-                    log.info("create_time字段满足公共字段自动填充规则，已填充");
-                    this.strictInsertFill(metaObject, "createTime", LocalDateTime.class, DateTimeUtil.getDateTime());
+                log.info("create_time字段满足公共字段自动填充规则，已填充");
+                this.strictInsertFill(metaObject, "createTime", LocalDateTime.class, DateTimeUtil.getDateTime());
 
             }
         });

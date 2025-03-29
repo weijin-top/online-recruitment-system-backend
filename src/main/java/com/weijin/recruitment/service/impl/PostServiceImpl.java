@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -57,7 +56,8 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements IP
 
     /**
      * 递归获取子级id
-     * @param parentId 父id
+     *
+     * @param parentId    父id
      * @param idsToDelete 存储容器
      */
     private void collectChildIds(Integer parentId, List<Integer> idsToDelete) {
@@ -74,6 +74,7 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements IP
             }
         }
     }
+
     @Override
     public Result<String> modifyPost(ModifyPostFrom modifyPostFrom) {
         Post post = postConverter.modifyFromToEntity(modifyPostFrom);

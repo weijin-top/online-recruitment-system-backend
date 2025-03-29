@@ -20,12 +20,13 @@ import org.springframework.context.annotation.Configuration;
 public class MybatisPlusConfig {
     @Resource
     private FiledFullHandler filedFullHandler;
+
     @Bean
-    public MybatisPlusInterceptor mybatisPlusInterceptor(){
+    public MybatisPlusInterceptor mybatisPlusInterceptor() {
         MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
         interceptor.addInnerInterceptor(new
                 PaginationInnerInterceptor(DbType.MYSQL));
-        //添加元数据对象处理器
+        // 添加元数据对象处理器
         return interceptor;
     }
 

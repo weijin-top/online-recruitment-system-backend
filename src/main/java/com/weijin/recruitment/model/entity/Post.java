@@ -13,7 +13,7 @@ import java.io.Serializable;
 
 /**
  * <p>
- *      岗位实体
+ * 岗位实体
  * </p>
  *
  * @author WeiJin
@@ -45,10 +45,10 @@ public class Post implements Serializable {
     @Override
     public String toString() {
         return "Station{" +
-            "id = " + id +
-            ", parentId = " + parentId +
-            ", name = " + name +
-            ", isDeleted = " + isDeleted +
-        "}";
+                "id = " + id +
+                ", parentId = " + parentId +
+                ", name = " + name +
+                ", isDeleted = " + isDeleted +
+                "}";
     }
 }

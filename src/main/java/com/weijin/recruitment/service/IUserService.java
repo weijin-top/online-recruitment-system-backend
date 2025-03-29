@@ -1,5 +1,6 @@
 package com.weijin.recruitment.service;
 
+import com.weijin.recruitment.model.dto.SessionDto;
 import com.weijin.recruitment.model.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.weijin.recruitment.common.Result;
@@ -39,4 +40,12 @@ public interface IUserService extends IService<User> {
      * @return 响应
      */
     Result<String> modifyPassword(ModifyPasswordFrom modifyPasswordFrom);
+
+    /**
+     * 根据用户id获取信息，并返回SessionDto类型
+     *
+     * @param userId 用户id
+     * @return sessionDto
+     */
+    SessionDto queryInfoByUserId(Integer userId);
 }

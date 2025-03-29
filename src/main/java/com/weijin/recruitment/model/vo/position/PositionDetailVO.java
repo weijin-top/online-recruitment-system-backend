@@ -40,6 +40,7 @@ public class PositionDetailVO {
     private String logo;
 
     private String intro;
+    private Integer userId;
     /**
      * 投递id，用于判断求职者是否投递了该职位
      */

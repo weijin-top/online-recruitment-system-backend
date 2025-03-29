@@ -19,6 +19,7 @@ import org.springframework.stereotype.Component;
 public interface InterviewConverter {
 
     Interview saveFromToEntity(SaveInterviewFrom saveInterviewFrom);
+
     Interview modifyFromToEntity(ModifyInterviewFrom modifyInterviewFrom);
 
     InterviewVO entityToVO(Interview interview);

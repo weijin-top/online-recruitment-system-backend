@@ -16,7 +16,7 @@ import com.weijin.recruitment.common.Result;
 import com.weijin.recruitment.model.vo.info.InfoVO;
 import com.weijin.recruitment.model.vo.info.ResumeVO;
 import com.weijin.recruitment.service.IInfoService;
-import com.weijin.recruitment.util.SecurityUtil;
+import com.weijin.recruitment.utils.SecurityUtil;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
@@ -77,7 +77,7 @@ public class InfoServiceImpl extends ServiceImpl<InfoMapper, Info> implements II
 
     @Override
     public Result<ResumeVO> queryResume(Integer userId) {
-        //获取基本信息
+        // 获取基本信息
         ResumeVO resumeVO = baseMapper.selectResume(userId);
         if (Objects.isNull(resumeVO)) {
             return Result.failed("该用户简历不存在");

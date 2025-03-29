@@ -8,7 +8,7 @@ import com.weijin.recruitment.common.RoleEnum;
 import com.weijin.recruitment.common.ResponseResult;
 import com.weijin.recruitment.common.Result;
 import com.weijin.recruitment.model.security.SecurityUserDetails;
-import com.weijin.recruitment.util.JwtUtil;
+import com.weijin.recruitment.utils.JwtUtil;
 import jakarta.annotation.Resource;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -47,9 +47,10 @@ public class VerifyTokenFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
-        // 登录、注册、校验验证码、获取验证码、放行
+        // 登录、注册、校验验证码、获取验证码、websocket放行
         String uri = request.getRequestURI();
-        if (uri.contains("auth") && !uri.contains("logout")) {
+        if ((uri.contains("auth") && !uri.contains("logout")) || uri.contains("websocket") ||
+                uri.contains("error") || uri.contains("ws")) {
             doFilter(request, response, filterChain);
             return;
         }

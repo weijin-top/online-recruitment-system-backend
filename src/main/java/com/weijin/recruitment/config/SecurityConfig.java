@@ -43,12 +43,14 @@ public class SecurityConfig {
             throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.formLogin(AbstractHttpConfigurer::disable);
 
         http.authorizeHttpRequests(auth -> {
             auth.requestMatchers("/api/auth/**").permitAll();
+            auth.requestMatchers("/websocket").permitAll();
             auth.requestMatchers("/api/auth/logout").authenticated();
             auth.anyRequest().authenticated();
         });
@@ -56,12 +58,10 @@ public class SecurityConfig {
         http.exceptionHandling(exceptionHandling -> exceptionHandling
                 .accessDeniedHandler((request, response, accessDeniedException)
                         -> responseResult.response(response, Result.failed(401, "你没有该资源的访问权限"))));
-        //自定义登录验证过滤器
+        // 自定义登录验证过滤器
         http.addFilterBefore(verifyTokenFilter, UsernamePasswordAuthenticationFilter.class);
-        // 放开跨域请求
+        // 禁用 CSRF
         http.csrf(AbstractHttpConfigurer::disable);
         return http.build();
     }
-
-
 }

@@ -71,7 +71,7 @@ public interface IPositionService extends IService<Position> {
      * @param type     职位类别
      * @param name     职位名称或公司名称
      * @param status   职位状态
-     * @param orderBy 排序方式，默认0时间降序，1随机
+     * @param orderBy  排序方式，默认0时间降序，1随机
      * @return 响应
      */
     Result<IPage<PositionSimpleVO>> pagePosition(Integer pageNum, Integer pageSize, Integer edu, String address,

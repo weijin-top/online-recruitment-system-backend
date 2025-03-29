@@ -34,21 +34,21 @@ public class StatServiceImpl implements IStatService {
     public Result<StatCountVO> queryStatNum() {
         StatCountVO statCountVO = userMapper.selectStatNum();
         statCountVO.setCompanyCount(
-                companyMapper.selectCount(new LambdaQueryWrapper<Company>().eq(Company::getStatus,1))
-                .intValue());
+                companyMapper.selectCount(new LambdaQueryWrapper<Company>().eq(Company::getStatus, 1))
+                        .intValue());
         statCountVO.setPositionCount(positionMapper.selectOpenPosition());
-        return Result.success("查询成功",statCountVO);
+        return Result.success("查询成功", statCountVO);
     }
 
     @Override
     public Result<EduCountVO> queryStatEdu() {
-       EduCountVO eduCountVO = positionMapper.selectStatEdu();
-        return Result.success("查询成功",eduCountVO);
+        EduCountVO eduCountVO = positionMapper.selectStatEdu();
+        return Result.success("查询成功", eduCountVO);
     }
 
     @Override
     public Result<List<PositionMonthCountVO>> queryStatPosition() {
-       List<PositionMonthCountVO> list =  positionMapper.selectStatPosition();
-        return Result.success("查询成功",list);
+        List<PositionMonthCountVO> list = positionMapper.selectStatPosition();
+        return Result.success("查询成功", list);
     }
 }

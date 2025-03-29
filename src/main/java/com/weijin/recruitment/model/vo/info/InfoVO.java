@@ -1,7 +1,5 @@
 package com.weijin.recruitment.model.vo.info;
 
-import com.weijin.recruitment.group.InfoGroup;
-import jakarta.validation.constraints.*;
 import lombok.Data;
 
 /**

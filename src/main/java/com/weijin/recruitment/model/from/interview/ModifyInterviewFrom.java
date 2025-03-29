@@ -16,11 +16,11 @@ import lombok.Data;
 @Data
 public class ModifyInterviewFrom {
 
-    @NotNull(message = "简历投递id不能为空",groups = InterviewGroup.ModifyInterviewGroup.class)
+    @NotNull(message = "简历投递id不能为空", groups = InterviewGroup.ModifyInterviewGroup.class)
     private Integer id;
-    @Min(value = 1,message = "面试结果只能是1或2",groups = InterviewGroup.ModifyInterviewGroup.class)
-    @Max(value = 2,message = "面试结果只能是1或2",groups = InterviewGroup.ModifyInterviewGroup.class)
+    @Min(value = 1, message = "面试结果只能是1或2", groups = InterviewGroup.ModifyInterviewGroup.class)
+    @Max(value = 2, message = "面试结果只能是1或2", groups = InterviewGroup.ModifyInterviewGroup.class)
     private Integer status;
-    @NotBlank(message = "面试结果备注不能为空",groups = InterviewGroup.ModifyInterviewGroup.class)
+    @NotBlank(message = "面试结果备注不能为空", groups = InterviewGroup.ModifyInterviewGroup.class)
     private String resultRemark;
 }

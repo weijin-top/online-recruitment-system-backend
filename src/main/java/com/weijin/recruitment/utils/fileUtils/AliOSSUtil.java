@@ -1,4 +1,4 @@
-package com.weijin.recruitment.util.FileUtil;
+package com.weijin.recruitment.utils.fileUtils;
 
 import cn.hutool.core.date.DateUtil;
 import com.aliyun.oss.OSS;

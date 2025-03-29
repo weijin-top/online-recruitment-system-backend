@@ -9,7 +9,7 @@ import com.weijin.recruitment.common.Result;
 import com.weijin.recruitment.model.vo.job.JobVO;
 import com.weijin.recruitment.service.IJobService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.weijin.recruitment.util.SecurityUtil;
+import com.weijin.recruitment.utils.SecurityUtil;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 

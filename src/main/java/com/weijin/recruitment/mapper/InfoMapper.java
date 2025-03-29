@@ -12,7 +12,8 @@ import com.weijin.recruitment.model.vo.info.ResumeVO;
 public interface InfoMapper extends BaseMapper<Info> {
     /**
      * 获取简历基本信息
-     * @param userId  用户id
+     *
+     * @param userId 用户id
      * @return 结果
      */
     ResumeVO selectResume(Integer userId);

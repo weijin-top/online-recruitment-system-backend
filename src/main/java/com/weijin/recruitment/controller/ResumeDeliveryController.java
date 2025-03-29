@@ -9,7 +9,7 @@ import com.weijin.recruitment.model.vo.resumedelivery.DeliveryInfoVO;
 import com.weijin.recruitment.model.vo.resumedelivery.ResumeDeliveryInfoVO;
 import com.weijin.recruitment.service.IInfoService;
 import com.weijin.recruitment.service.IResumeDeliveryService;
-import com.weijin.recruitment.util.SecurityUtil;
+import com.weijin.recruitment.utils.SecurityUtil;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -43,7 +43,7 @@ public class ResumeDeliveryController {
     @PostMapping("/{positionId}")
     @PreAuthorize("hasAnyRole('seeker')")
     public Result<String> saveResumeDelivery(@PathVariable("positionId") Integer positionId) {
-        //未完善简历不能投递简历
+        // 未完善简历不能投递简历
         Result<ResumeVO> result = iInfoService.queryResume(SecurityUtil.getUserId());
         if (Objects.isNull(result.getData())) {
             return Result.failed("请先完成简历再尝试投递该职位");

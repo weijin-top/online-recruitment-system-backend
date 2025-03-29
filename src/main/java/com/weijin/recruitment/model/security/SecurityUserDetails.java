@@ -1,7 +1,6 @@
 package com.weijin.recruitment.model.security;
 
 
-
 import com.weijin.recruitment.model.entity.User;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -30,6 +29,7 @@ public class SecurityUserDetails implements UserDetails {
     public SecurityUserDetails(User user) {
         this.user = user;
     }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return permissions;
@@ -37,7 +37,7 @@ public class SecurityUserDetails implements UserDetails {
 
     @Override
     public String getPassword() {
-        String myPassword=user.getPassword();
+        String myPassword = user.getPassword();
         user.setPassword("");
         return myPassword;
     }

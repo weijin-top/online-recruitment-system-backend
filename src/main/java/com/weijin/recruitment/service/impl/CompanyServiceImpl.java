@@ -13,7 +13,7 @@ import com.weijin.recruitment.common.Result;
 import com.weijin.recruitment.model.vo.company.CompanyVO;
 import com.weijin.recruitment.service.ICompanyService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.weijin.recruitment.util.SecurityUtil;
+import com.weijin.recruitment.utils.SecurityUtil;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
@@ -76,7 +76,7 @@ public class CompanyServiceImpl extends ServiceImpl<CompanyMapper, Company> impl
 
     @Override
     public Result<CompanyVO> querySingle(Integer id) {
-        //校验管理员不给企业信息id
+        // 校验管理员不给企业信息id
         if (Objects.isNull(id) && Objects.equals(SecurityUtil.getRole(), RoleEnum.getRole(3))) {
             return Result.failed("企业信息id不能为空");
         }

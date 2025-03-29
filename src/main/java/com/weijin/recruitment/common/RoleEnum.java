@@ -13,22 +13,22 @@ import java.util.Objects;
 public enum RoleEnum {
 
 
-
-    SEEKER(1,"ROLE_seeker"),
-    RECRUITER(2,"ROLE_recruiter"),
-    ADMIN(3,"ROLE_admin");
+    SEEKER(1, "ROLE_seeker"),
+    RECRUITER(2, "ROLE_recruiter"),
+    ADMIN(3, "ROLE_admin");
 
     @Getter
     private final Integer code;
     private final String role;
-    private RoleEnum(Integer code,String role){
+
+    private RoleEnum(Integer code, String role) {
         this.code = code;
         this.role = role;
     }
 
-    public static String getRole(Integer code){
-        for (RoleEnum roleEnum:RoleEnum.values()){
-            if (Objects.equals(roleEnum.code, code)){
+    public static String getRole(Integer code) {
+        for (RoleEnum roleEnum : RoleEnum.values()) {
+            if (Objects.equals(roleEnum.code, code)) {
                 return roleEnum.role;
             }
         }

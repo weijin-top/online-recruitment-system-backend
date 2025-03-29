@@ -52,17 +52,19 @@ public class AuthController {
 
     /**
      * 注册用户
-     * @param request request对象，用户获取sessionId
+     *
+     * @param request      request对象，用户获取sessionId
      * @param registerFrom 入参
      * @return 响应
      */
     @PostMapping("/register")
-    public Result<String> register(HttpServletRequest request,@Validated @RequestBody RegisterFrom registerFrom){
-       return iAuthService.register(request,registerFrom);
+    public Result<String> register(HttpServletRequest request, @Validated @RequestBody RegisterFrom registerFrom) {
+        return iAuthService.register(request, registerFrom);
     }
 
     /**
      * 获取图片验证码
+     *
      * @param request  request对象，获取sessionId
      * @param response response对象，响应图片
      */

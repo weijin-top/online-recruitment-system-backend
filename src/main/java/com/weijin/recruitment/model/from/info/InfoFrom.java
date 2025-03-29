@@ -12,7 +12,7 @@ import lombok.Data;
 @Data
 public class InfoFrom {
 
-    @NotNull(message = "个人信息id不能为空",groups = InfoGroup.ModifyInfoGroup.class)
+    @NotNull(message = "个人信息id不能为空", groups = InfoGroup.ModifyInfoGroup.class)
     private Integer id;
 
     @NotNull(message = "意向岗位不能为空", groups = InfoGroup.SaveInfoGroup.class)

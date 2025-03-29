@@ -26,18 +26,6 @@
             <foreach collection="status" open="(" close=")" separator="," item="i">
                 #{i}
             </foreach>
-            <!--            <choose>-->
-            <!--                <when test="status != null">-->
-            <!--                    and iv.status = #{status}-->
-            <!--                </when>-->
-            <!--                <otherwise>-->
-            <!--                    and iv.status in -->
-            <!--                    <foreach collection="status" open="(" close=")" separator="," item="i">-->
-            <!--                     i-->
-            <!--                    </foreach>-->
-            <!--                   -->
-            <!--                </otherwise>-->
-            <!--            </choose>-->
             and c.id = #{companyId}
             and iv.is_deleted = 0
         </trim>

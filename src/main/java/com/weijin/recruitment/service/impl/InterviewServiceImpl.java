@@ -19,7 +19,7 @@ import com.weijin.recruitment.model.vo.interview.InterviewResultVO;
 import com.weijin.recruitment.model.vo.interview.InterviewVO;
 import com.weijin.recruitment.service.IInterviewService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.weijin.recruitment.util.SecurityUtil;
+import com.weijin.recruitment.utils.SecurityUtil;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,7 +27,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -58,12 +57,12 @@ public class InterviewServiceImpl extends ServiceImpl<InterviewMapper, Interview
         if (Objects.equals(dbResumeDelivery.getStatus(), 3)) {
             return Result.failed("不能重复邀约面试");
         }
-        //修改简历投递表中状态
+        // 修改简历投递表中状态
         ResumeDelivery resumeDelivery = new ResumeDelivery();
         resumeDelivery.setId(saveInterviewFrom.getRdId());
         resumeDelivery.setStatus(3);
         int result = resumeDeliveryMapper.updateById(resumeDelivery);
-        //保存面试邀约表
+        // 保存面试邀约表
         Interview interview = interviewConverter.saveFromToEntity(saveInterviewFrom);
         interview.setStatus(0);
         result += baseMapper.insert(interview);
@@ -93,7 +92,7 @@ public class InterviewServiceImpl extends ServiceImpl<InterviewMapper, Interview
 
     @Override
     public Result<IPage<InterviewResultVO>> queryInterviewResult(Integer pageNum, Integer pageSize, String positionName, String status) {
-        //先获取自己的公司信息
+        // 先获取自己的公司信息
         LambdaQueryWrapper<Company> wrapper = new LambdaQueryWrapper<Company>().eq(Company::getUserId, SecurityUtil.getUserId());
         Company company = companyMapper.selectOne(wrapper);
         if (Objects.isNull(company)) {

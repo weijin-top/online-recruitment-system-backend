@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
  * <p>
- *  Mapper 接口
+ * Mapper 接口
  * </p>
  *
  * @author WeiJin
@@ -15,6 +15,7 @@ public interface CompanyMapper extends BaseMapper<Company> {
 
     /**
      * 根据职位id获取公司信息
+     *
      * @param id 职位id
      * @return 结果
      */

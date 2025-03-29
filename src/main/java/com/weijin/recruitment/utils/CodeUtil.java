@@ -1,7 +1,6 @@
-package com.weijin.recruitment.util;
+package com.weijin.recruitment.utils;
 
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
-import com.weijin.recruitment.common.Result;
 import jakarta.validation.constraints.NotBlank;
 
 /**
@@ -10,15 +9,17 @@ import jakarta.validation.constraints.NotBlank;
  * @Date 2024/10/19 16:01
  */
 public class CodeUtil {
-    private CodeUtil(){}
+    private CodeUtil() {
+    }
 
     /**
      * 检验验证码
+     *
      * @param rightCode 正确的验证码
-     * @param code 用户传入的验证码
+     * @param code      用户传入的验证码
      * @return 结果
      */
-    public static boolean verityCode(@NotBlank String rightCode, @NotBlank String code){
+    public static boolean verityCode(@NotBlank String rightCode, @NotBlank String code) {
         if (StringUtils.isBlank(rightCode)) {
             return false;
         }

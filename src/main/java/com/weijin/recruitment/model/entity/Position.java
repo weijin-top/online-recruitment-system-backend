@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 
 /**
  * <p>
- *      职位实体
+ * 职位实体
  * </p>
  *
  * @author WeiJin
@@ -79,19 +79,19 @@ public class Position implements Serializable {
     @Override
     public String toString() {
         return "Position{" +
-            "id = " + id +
-            ", companyId = " + companyId +
-            ", name = " + name +
-            ", type = " + type +
-            ", number = " + number +
-            ", miniSalary = " + miniSalary +
-            ", maxSalary = " + maxSalary +
-            ", jobPlace = " + jobPlace +
-            ", education = " + education +
-            ", jobRequire = " + jobRequire +
-            ", status = " + status +
-            ", createTime = " + createTime +
-            ", isDeleted = " + isDeleted +
-        "}";
+                "id = " + id +
+                ", companyId = " + companyId +
+                ", name = " + name +
+                ", type = " + type +
+                ", number = " + number +
+                ", miniSalary = " + miniSalary +
+                ", maxSalary = " + maxSalary +
+                ", jobPlace = " + jobPlace +
+                ", education = " + education +
+                ", jobRequire = " + jobRequire +
+                ", status = " + status +
+                ", createTime = " + createTime +
+                ", isDeleted = " + isDeleted +
+                "}";
     }
 }

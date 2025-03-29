@@ -13,6 +13,7 @@ public interface ICommonService {
 
     /**
      * 上传图片
+     *
      * @param file 文件
      * @return 返回上传后的地址
      */

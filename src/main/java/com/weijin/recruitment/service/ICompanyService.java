@@ -43,7 +43,7 @@ public interface ICompanyService extends IService<Company> {
      * @param name     公司名称
      * @return 响应
      */
-    Result<IPage<CompanyVO>> queryCompanies(Integer pageNum, Integer pageSize, Integer status,String name);
+    Result<IPage<CompanyVO>> queryCompanies(Integer pageNum, Integer pageSize, Integer status, String name);
 
     /**
      * 获取单个公司信息
@@ -55,6 +55,7 @@ public interface ICompanyService extends IService<Company> {
 
     /**
      * 修改公司信息
+     *
      * @param companyFrom 入参
      * @return 响应
      */

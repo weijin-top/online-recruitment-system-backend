@@ -1,4 +1,4 @@
-package com.weijin.recruitment.util.FileUtil;
+package com.weijin.recruitment.utils.fileUtils;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.io.FileUtil;

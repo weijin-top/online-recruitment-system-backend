@@ -16,8 +16,8 @@ public class RegisterFrom {
     private String username;
     @NotBlank(message = "密码不能为空")
     private String password;
-    @Min(value = 1,message = "角色只能是1或2")
-    @Max(value = 2,message = "角色只能是1或2")
+    @Min(value = 1, message = "角色只能是1或2")
+    @Max(value = 2, message = "角色只能是1或2")
     private Integer roleId;
     @NotBlank(message = "验证码不能为空")
     private String code;

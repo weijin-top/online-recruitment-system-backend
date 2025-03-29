@@ -15,10 +15,8 @@ import com.weijin.recruitment.model.vo.resumedelivery.DeliveryInfoVO;
 import com.weijin.recruitment.model.vo.resumedelivery.ResumeDeliveryInfoVO;
 import com.weijin.recruitment.service.IResumeDeliveryService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.weijin.recruitment.util.SecurityUtil;
+import com.weijin.recruitment.utils.SecurityUtil;
 import jakarta.annotation.Resource;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
@@ -85,6 +83,7 @@ public class ResumeDeliveryServiceImpl extends ServiceImpl<ResumeDeliveryMapper,
         int updated = resumeDeliveryMapper.updateById(resumeDelivery);
         return updated > 0 ? Result.success("操作成功") : Result.failed("操作失败");
     }
+
     @Override
     public Result<IPage<DeliveryInfoVO>> queryDeliveryInfo(Integer pageNum, Integer pageSize, Integer status) {
         if (Objects.nonNull(status) && (status < 0 || status > 3)) {
@@ -104,7 +103,7 @@ public class ResumeDeliveryServiceImpl extends ServiceImpl<ResumeDeliveryMapper,
     @Override
     public Result<IPage<ResumeDeliveryInfoVO>> queryResumeDeliveryInfo(Integer pageNum, Integer pageSize,
                                                                        Integer education, String positionName, Integer status) {
-        //先获取自己的公司信息
+        // 先获取自己的公司信息
         LambdaQueryWrapper<Company> wrapper = new LambdaQueryWrapper<Company>().eq(Company::getUserId, SecurityUtil.getUserId());
         Company company = companyMapper.selectOne(wrapper);
         if (Objects.isNull(company)) {

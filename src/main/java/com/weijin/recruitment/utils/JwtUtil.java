@@ -1,4 +1,4 @@
-package com.weijin.recruitment.util;
+package com.weijin.recruitment.utils;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -42,19 +42,19 @@ public class JwtUtil {
      * @return
      */
     public String createJwt(String userInfo, List<String> authList) {
-        Date issDate = new Date();//签发时间
+        Date issDate = new Date();// 签发时间
         Date expireDate = new Date(issDate.getTime() + expireTime);
-        //定义头部信息
+        // 定义头部信息
         Map<String, Object> headerClaims = new HashMap<>();
-        headerClaims.put("alg", "HS256");//算法
-        headerClaims.put("typ", "JWT");//类型只能是jwt
+        headerClaims.put("alg", "HS256");// 算法
+        headerClaims.put("typ", "JWT");// 类型只能是jwt
         return JWT.create().withHeader(headerClaims)
-                .withIssuer("wj")//签发人
-                .withIssuedAt(issDate)//签发时间
-                .withExpiresAt(expireDate)//过期时间
-                .withClaim("userInfo", userInfo)//自定义声明
+                .withIssuer("wj")// 签发人
+                .withIssuedAt(issDate)// 签发时间
+                .withExpiresAt(expireDate)// 过期时间
+                .withClaim("userInfo", userInfo)// 自定义声明
                 .withClaim("authList", authList)
-                .sign(Algorithm.HMAC256(secret));//使用HS256作为签名，SECRET作为密钥
+                .sign(Algorithm.HMAC256(secret));// 使用HS256作为签名，SECRET作为密钥
     }
 
 
@@ -65,7 +65,7 @@ public class JwtUtil {
      * @return
      */
     public boolean verifyToken(String token) {
-        //构建jwt校验器
+        // 构建jwt校验器
         JWTVerifier verifier = JWT.require(Algorithm.HMAC256(secret)).build();
         try {
             verifier.verify(token);
@@ -83,7 +83,7 @@ public class JwtUtil {
      * @return
      */
     public String getUser(String token) {
-        //构建jwt校验器
+        // 构建jwt校验器
         JWTVerifier verifier = JWT.require(Algorithm.HMAC256(secret)).build();
         try {
             DecodedJWT jwt = verifier.verify(token);
@@ -101,7 +101,7 @@ public class JwtUtil {
      * @return
      */
     public List<String> getAuthList(String token) {
-        //构建jwt校验器
+        // 构建jwt校验器
         JWTVerifier verifier = JWT.require(Algorithm.HMAC256(secret)).build();
         try {
             DecodedJWT jwt = verifier.verify(token);

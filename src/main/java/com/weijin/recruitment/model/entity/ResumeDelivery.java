@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 
 /**
  * <p>
- *      简历投递实体
+ * 简历投递实体
  * </p>
  *
  * @author WeiJin
@@ -48,12 +48,12 @@ public class ResumeDelivery implements Serializable {
     @Override
     public String toString() {
         return "ResumeDelivery{" +
-            "id = " + id +
-            ", userId = " + userId +
-            ", positionId = " + positionId +
-            ", status = " + status +
-            ", createTime = " + createTime +
-            ", isDeleted = " + isDeleted +
-        "}";
+                "id = " + id +
+                ", userId = " + userId +
+                ", positionId = " + positionId +
+                ", status = " + status +
+                ", createTime = " + createTime +
+                ", isDeleted = " + isDeleted +
+                "}";
     }
 }

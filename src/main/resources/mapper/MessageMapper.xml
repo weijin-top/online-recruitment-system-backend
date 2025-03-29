@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.weijin.recruitment.mapper.MessageMapper">
+
+    <select id="selectSeekerLastRecord" resultType="com.weijin.recruitment.model.vo.message.LastMessageVo">
+        select t.id, t.name, t.avatar, t.content, t.create_time, t.otherId, t.unread_count -- 添加未读消息数量字段
+        from (
+--         子查询，查询出求职者所有的聊天记录
+                 select m.id,
+                        c.nickname as `name`,
+                        u.avatar,
+                        m.content,
+                        m.create_time,
+                        case
+                            when m.sender_id = #{userId} then m.receiver_id -- 如果当前用户是发送者，则对方是接收者
+                            else m.sender_id -- 如果当前用户是接收者，则对方是发送者
+                            end    as otherId, -- 添加对方的ID
+--                         row_number()窗口函数，给每一条条记录设置一个唯一序号，序号从1开始依次递增
+--                          over()函数：设置row_number函数的作用范围
+--                         partition by c.nickname将数据按照c.nickname分组
+                        row_number()  over (partition by c.nickname order by m.create_time desc) as rn, sum(case when m.is_read = 0 and m.receiver_id = #{userId} then 1 else 0 end)
+                     over (partition by c.nickname) as unread_count -- 统计未读消息数量
+                 from t_message as m
+                          join t_user as u on m.sender_id = u.id or m.receiver_id = u.id
+                          join t_company as c on c.user_id = u.id
+                 where m.sender_id = #{userId}
+                    OR m.receiver_id = #{userId}) as t
+--         只取第一条记录
+        where t.rn = 1
+--         按照发送时间降序排序
+        order by t.create_time desc
+    </select>
+    <select id="selectRecruiterLastRecord" resultType="com.weijin.recruitment.model.vo.message.LastMessageVo">
+        select t.id, t.name, t.avatar, t.content, t.create_time, t.otherId, t.unread_count -- 添加未读消息数量字段
+        from (
+--         子查询，查询出求职者所有的聊天记录
+                 select m.id,
+                        i.name,
+                        u.avatar,
+                        m.content,
+                        m.create_time,
+                        case
+                            when m.sender_id = #{userId} then m.receiver_id -- 如果当前用户是发送者，则对方是接收者
+                            else m.sender_id -- 如果当前用户是接收者，则对方是发送者
+                            end as   otherId, -- 添加对方的ID
+--                         row_number()窗口函数，给每一条条记录设置一个唯一序号，序号从1开始依次递增
+--                          over()函数：设置row_number函数的作用范围
+--                         partition by c.nickname将数据按照c.nickname分组
+                        row_number() over (partition by i.name order by m.create_time desc) as rn, sum(case when m.is_read = 0 and m.receiver_id = #{userId} then 1 else 0 end)
+                     over (partition by i.name) as unread_count -- 统计未读消息数量
+                 from t_message as m
+                          join t_user as u on m.sender_id = u.id or m.receiver_id = u.id
+                          join t_info as i on i.user_id = u.id
+                 where m.sender_id = #{userId}
+                    OR m.receiver_id = #{userId}) as t
+--         只取第一条记录
+        where t.rn = 1
+--         按照发送时间降序排序
+    order by t.create_time desc
+    </select>
+    <select id="selectMutualRecord" resultType="com.weijin.recruitment.model.vo.message.MutualMessageVo">
+        select id, sender_id, receiver_id, content, create_time
+        from t_message
+        where sender_id = #{senderId}
+          and receiver_id = #{receiverId}
+        union all
+        select id, sender_id, receiver_id, content, create_time
+        from t_message
+        where sender_id = #{receiverId}
+          and receiver_id = #{senderId}
+        order by create_time asc
+    </select>
+</mapper>

@@ -1,4 +1,4 @@
-package com.weijin.recruitment.util;
+package com.weijin.recruitment.utils;
 
 
 import com.weijin.recruitment.model.security.SecurityUserDetails;

@@ -23,7 +23,8 @@ public interface PositionMapper extends BaseMapper<Position> {
     /**
      * 根据职位id获取职位详情
      *
-     * @param id 职位id
+     * @param id     职位id
+     * @param userId 自己的用户id
      * @return 结果
      */
     PositionDetailVO selectPositionDetailById(Integer id, Integer userId);
@@ -38,10 +39,11 @@ public interface PositionMapper extends BaseMapper<Position> {
      * @param name      公司或岗位名称
      * @param status    职位状态
      * @param companyId 公司id
+     * @param orderBy   排序方式 0创建时间降序 1随机
      * @return 结果
      */
     IPage<PositionSimpleVO> pagePosition(IPage<PositionSimpleVO> page, Integer edu, String address, Integer type,
-                                         String name, Integer status, Integer companyId,Integer orderBy);
+                                         String name, Integer status, Integer companyId, Integer orderBy);
 
     /**
      * 查询再招职位数量

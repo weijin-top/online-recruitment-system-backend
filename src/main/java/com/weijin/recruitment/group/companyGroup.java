@@ -6,6 +6,9 @@ package com.weijin.recruitment.group;
  * @Date 2024/8/18 22:49
  */
 public interface companyGroup {
-    interface SaveCompanyGroup extends  companyGroup{}
-    interface ModifyCompanyGroup extends  companyGroup{}
+    interface SaveCompanyGroup extends companyGroup {
+    }
+
+    interface ModifyCompanyGroup extends companyGroup {
+    }
 }

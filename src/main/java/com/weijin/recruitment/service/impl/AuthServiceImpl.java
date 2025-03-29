@@ -3,7 +3,6 @@ package com.weijin.recruitment.service.impl;
 import cn.hutool.captcha.CaptchaUtil;
 import cn.hutool.captcha.LineCaptcha;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.weijin.recruitment.common.Constant;
@@ -16,8 +15,8 @@ import com.weijin.recruitment.model.from.user.RegisterFrom;
 import com.weijin.recruitment.common.Result;
 import com.weijin.recruitment.model.security.SecurityUserDetails;
 import com.weijin.recruitment.service.IAuthService;
-import com.weijin.recruitment.util.CodeUtil;
-import com.weijin.recruitment.util.JwtUtil;
+import com.weijin.recruitment.utils.CodeUtil;
+import com.weijin.recruitment.utils.JwtUtil;
 import jakarta.annotation.Resource;
 import jakarta.servlet.ServletOutputStream;
 import jakarta.servlet.http.HttpServletRequest;
@@ -55,15 +54,15 @@ public class AuthServiceImpl implements IAuthService {
     @Resource
     private UserConverter userConverter;
     @Resource
-    private RedisTemplate<String,String> redisTemplate;
+    private RedisTemplate<String, String> redisTemplate;
 
     @SneakyThrows(JsonProcessingException.class)
     @Override
     public Result<String> login(HttpServletRequest request, LoginFrom loginFrom) {
-        //判断验证码
+        // 判断验证码
         String key = "%s-code:%s".formatted(Constant.APPLICATION, request.getSession().getId());
         String rightCode = redisTemplate.opsForValue().get(key);
-        if (!CodeUtil.verityCode(rightCode,loginFrom.getCode())){
+        if (!CodeUtil.verityCode(rightCode, loginFrom.getCode())) {
             return Result.failed("验证码错误");
         }
         // 验证码校验后redis清除验证码，避免重复使用
@@ -106,11 +105,11 @@ public class AuthServiceImpl implements IAuthService {
     }
 
     @Override
-    public Result<String> register(HttpServletRequest request,RegisterFrom registerFrom) {
-        //判断验证码
+    public Result<String> register(HttpServletRequest request, RegisterFrom registerFrom) {
+        // 判断验证码
         String key = "%s-code:%s".formatted(Constant.APPLICATION, request.getSession().getId());
         String rightCode = redisTemplate.opsForValue().get(key);
-        if (!CodeUtil.verityCode(rightCode,registerFrom.getCode())){
+        if (!CodeUtil.verityCode(rightCode, registerFrom.getCode())) {
             return Result.failed("验证码错误");
         }
         // 验证码校验后redis清除验证码，避免重复使用

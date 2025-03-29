@@ -8,6 +8,8 @@ package com.weijin.recruitment.common;
  */
 public class Constant {
     public static final String APPLICATION = "online-recruitment-system";
-    private Constant(){}
+
+    private Constant() {
+    }
 
 }

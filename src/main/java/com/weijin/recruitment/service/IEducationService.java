@@ -36,6 +36,7 @@ public interface IEducationService extends IService<Education> {
 
     /**
      * 删除教育经历信息
+     *
      * @param id 教育经历id
      * @return 响应
      */

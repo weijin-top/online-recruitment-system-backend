@@ -8,7 +8,7 @@
         where is_deleted = 0
           and parent_id is null
     </select>
-    <select id="selectChildPosts"  resultMap="postMap">
+    <select id="selectChildPosts" resultMap="postMap">
         select id, parent_id, name
         from t_post
         where is_deleted = 0

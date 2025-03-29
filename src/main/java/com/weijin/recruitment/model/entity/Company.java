@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 /**
  * <p>
- *      公司实体
+ * 公司实体
  * </p>
  *
  * @author WeiJin
@@ -52,14 +52,14 @@ public class Company implements Serializable {
     @Override
     public String toString() {
         return "Company{" +
-            "id = " + id +
-            ", userId = " + userId +
-            ", name = " + name +
-            ", address = " + address +
-            ", logo = " + logo +
-            ", intro = " + intro +
-            ", status = " + status +
-            ", isDeleted = " + isDeleted +
-        "}";
+                "id = " + id +
+                ", userId = " + userId +
+                ", name = " + name +
+                ", address = " + address +
+                ", logo = " + logo +
+                ", intro = " + intro +
+                ", status = " + status +
+                ", isDeleted = " + isDeleted +
+                "}";
     }
 }

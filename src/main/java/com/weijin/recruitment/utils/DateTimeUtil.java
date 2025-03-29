@@ -1,4 +1,4 @@
-package com.weijin.recruitment.util;
+package com.weijin.recruitment.utils;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -13,6 +13,7 @@ public class DateTimeUtil {
 
     private DateTimeUtil() {
     }
+
     private static final String dataFormat = "yyyy-MM-dd";
     private static final String format = "yyyy-MM-dd HH:mm:ss";
 
@@ -24,6 +25,7 @@ public class DateTimeUtil {
     public static LocalDateTime getDateTime() {
         return LocalDateTime.parse(datetimeToStr(LocalDateTime.now()), DateTimeFormatter.ofPattern(format));
     }
+
     public static LocalDate getDate() {
         return LocalDate.parse(dateToStr(LocalDate.now()), DateTimeFormatter.ofPattern(dataFormat));
     }
@@ -38,6 +40,7 @@ public class DateTimeUtil {
         return DateTimeFormatter.ofPattern(format).format(dateTime);
 
     }
+
     public static String dateToStr(LocalDate date) {
         return DateTimeFormatter.ofPattern(dataFormat).format(date);
 

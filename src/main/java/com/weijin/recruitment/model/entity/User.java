@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 
 /**
  * <p>
- *      用户实体
+ * 用户实体
  * </p>
  *
  * @author WeiJin

@@ -6,8 +6,11 @@ package com.weijin.recruitment.group;
  * @Date 2024/7/8 19:40
  */
 public interface PositionGroup {
-    interface SavePositionGroup extends PositionGroup{}
-    interface ModifyPositionGroup extends PositionGroup{}
+    interface SavePositionGroup extends PositionGroup {
+    }
+
+    interface ModifyPositionGroup extends PositionGroup {
+    }
 
 
 }
