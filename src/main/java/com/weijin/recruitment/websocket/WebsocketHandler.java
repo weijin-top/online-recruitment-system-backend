@@ -115,7 +115,7 @@ public class WebsocketHandler {
                     && socket.getSession().isOpen()) {
                 try {
                     // 加锁，保证同时只有一个线程在使用websocket发送信息
-                    synchronized (this) {
+                    synchronized (WebsocketHandler.class) {
                         socket.getSession().getBasicRemote().sendText(finalJsonStrOnlineUsers);
                     }
                 } catch (IOException e) {
@@ -142,7 +142,7 @@ public class WebsocketHandler {
         try {
             String jsonStrOnlineUser = objectMapper.writeValueAsString(result);
             // 加锁，保证同时只有一个线程在使用websocket发送信息
-            synchronized (this) {
+            synchronized (WebsocketHandler.class) {
                 session.getBasicRemote().sendText(jsonStrOnlineUser);
             }
             log.info("[websocket信息]: 发送单点信息：{}", jsonStrOnlineUser);
@@ -225,7 +225,7 @@ public class WebsocketHandler {
         if (receiverSession.isOpen()) {
             try {
                 // 加锁，保证同时只有一个线程在使用websocket发送信息
-                synchronized (this) {
+                synchronized (WebsocketHandler.class) {
                     receiverSession.getBasicRemote().sendText(res);
                 }
             } catch (IOException e) {
