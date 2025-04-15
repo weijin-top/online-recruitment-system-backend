@@ -64,6 +64,7 @@ public class MinioUtil implements IFileUtil {
 
             fileUrl = minioClient.getPresignedObjectUrl(getPresignedObjectUrlArgs);
             fileUrl = fileUrl.substring(0, fileUrl.indexOf("?"));
+            fileUrl = fileUrl.substring(fileUrl.lastIndexOf("recruitment"));
             return fileUrl;
         } catch (Exception e) {
             e.printStackTrace();

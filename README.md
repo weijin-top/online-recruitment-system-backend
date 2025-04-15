@@ -9,7 +9,7 @@
 #### 介绍
 
 本项目为求职招聘系统，该仓库为**后端**，本项目已经完成，如有疑问可以在issue中提问，看见会仔细回答各位。  
-如在测试过程中发现bug，请及时联系，有时间会一一修复，联系方式在下方  
+如在测试过程中发现bug，请及时联系，有时间会一一修复，联系方式在下方
 
 **如果各位喜欢，麻烦各位大佬点点Star**
 
@@ -21,6 +21,8 @@
 4. 本项目配置了minio本地存储和OSS阿里云存储，**建议使用minio存储**，需**先安装minio到本地**，网上有许多教程，再**访问minio web网页创建一个新的Bucket**，接着**创建Access Keys**
    ,最后**配置修改配置文件minio信息**
 5. 注意：使用了minio本地存储图片，页面中的图片无法显示，需要在将数据库图片地址修改为自己上传到minio上的地址，数据库只需要recruitment后面的地址(包含recruitment/，因为前端做了图片代理)
+6. **minio中一定要开启权限，步骤（以开启online-recruitment-system的权限为例）Buckets->online-recruitment-system->Access Policy 一定要设置为public(
+   非常重要！！！)**
 
 #### 安装
 
