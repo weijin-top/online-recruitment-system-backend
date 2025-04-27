@@ -23,6 +23,7 @@
 5. 注意：使用了minio本地存储图片，页面中的图片无法显示，需要在将数据库图片地址修改为自己上传到minio上的地址，数据库只需要recruitment后面的地址(包含recruitment/，因为前端做了图片代理)
 6. **minio中一定要开启权限，步骤（以开启online-recruitment-system的权限为例）Buckets->online-recruitment-system->Access Policy 一定要设置为public(
    非常重要！！！)**
+7. 使用了自己的阿里云OSS文件存储或者使用minio 本地存储，一定要在vue.config.js 和图片代理服务器(utils ->proxyImgServer.js)中的代理地址改为自己的！！！
 
 #### 安装
 
