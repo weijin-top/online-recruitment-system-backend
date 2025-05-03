@@ -162,12 +162,24 @@ public class GlobalExceptionHandler {
     }
 
     /**
+     * 处理运行时异常
+     *
+     * @param e 异常
+     * @return 响应
+     */
+    @ExceptionHandler(RuntimeException.class)
+    public Result<String> handleRuntimeException(RuntimeException e) {
+        log.error(e.getMessage(), e.getClass(), e.getCause());
+        return Result.failed("服务端运行时异常");
+    }
+
+    /**
      * 处理其他异常
      *
      * @param e 异常
      * @return 响应
      */
-//    @ExceptionHandler(Exception.class)
+    @ExceptionHandler(Exception.class)
     public Result<String> handleException(Exception e) {
         log.error(e.getMessage(), e.getClass(), e.getCause());
         return Result.failed("未知异常");

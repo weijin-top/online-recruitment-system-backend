@@ -13,7 +13,6 @@ import org.springframework.web.socket.server.standard.ServerEndpointExporter;
  */
 @Configuration
 @EnableWebSocket
-// @EnableWebSocketMessageBroker
 public class WebsocketConfig {
     @Bean
     public ServerEndpointExporter serverEndpointExporter() {
