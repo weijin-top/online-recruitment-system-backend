@@ -4,7 +4,7 @@
 
 > 1.**项目演示地址**: [bilibili演示地址](https://www.bilibili.com/video/BV1tYPUeJEaF/)
 
-> 2.**前端仓库地址**：[配套项目前端地址](https://gitee.com/weijin-top/online-recruitment-system-frontend.git)
+> 2.**前端仓库地址**：[配套项目前端地址](https://github.com/weijin-top/online-recruitment-system-frontend.git)
 
 #### 介绍
 
