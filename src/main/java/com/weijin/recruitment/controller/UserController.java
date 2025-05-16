@@ -1,5 +1,6 @@
 package com.weijin.recruitment.controller;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.weijin.recruitment.common.Result;
 import com.weijin.recruitment.model.from.user.ModifyPasswordFrom;
 import com.weijin.recruitment.model.from.user.UserFrom;
@@ -55,6 +56,35 @@ public class UserController {
     @PreAuthorize("hasAnyRole('seeker','recruiter','admin')")
     public Result<String> modifyPassword(@RequestBody ModifyPasswordFrom modifyPasswordFrom) {
         return iUserService.modifyPassword(modifyPasswordFrom);
+    }
+
+    /**
+     * 分页获取用户信息
+     * @param pageNum 页码
+     * @param pageSize 每页记录数
+     * @param username 用户名
+     * @param roleId 角色
+     * @return 响应
+     */
+    @GetMapping("/pageUser")
+    @PreAuthorize("hasAnyRole('admin')")
+    public Result<IPage<UserVO>> pageUser(
+            @RequestParam(value = "pageNum", defaultValue = "1", required = false) Integer pageNum,
+            @RequestParam(value = "pageSize", defaultValue = "10", required = false) Integer pageSize,
+            @RequestParam(value = "username", required = false) String username,
+            @RequestParam(value = "roleId", required = false) Integer roleId) {
+        return iUserService.pageUser(pageNum,pageSize,username,roleId);
+    }
+
+    /**
+     * 重置密码
+     * @param id 用户id
+     * @return 响应
+     */
+    @PutMapping("/resetPassword/{id}")
+    @PreAuthorize("hasAnyRole('admin')")
+    public Result<String> resetPassword(@PathVariable Integer id) {
+        return iUserService.resetPassword(id);
     }
 
 }

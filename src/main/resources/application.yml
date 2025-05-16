@@ -4,7 +4,7 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
-    password: XXXXXXXXXXXXXXXXXXXXXXXXX
+    password: XXXXXXXXXXXXXX
     url: jdbc:mysql://localhost:3306/db_recruitment?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8
   jackson:
     serialization:
@@ -13,7 +13,7 @@ spring:
     redis:
       database: 0
       host: localhost
-      password: XXXXXXXXXXXXXXXXXXXXXXXXX
+      password: XXXXXXXXXXXXX
       port: 6379
       timeout: 10s
       lettuce:
@@ -42,19 +42,23 @@ jwt:
 
 # 阿里云OSS对象存储
 oss:
-  endpoint: XXXXXXXXXXXXXXXXXXXXXXXXX
-  access-key-id: XXXXXXXXXXXXXXXXXXXXXXXXX
-  access-key-secret: XXXXXXXXXXXXXXXXXXXXXXXXX
-  bucket-name: XXXXXXXXXXXXXXXXXXXXXXXXX
+  endpoint: XXXXXXXXXXXXXXXXX
+  access-key-id: XXXXXXXXXXXXXXX
+  access-key-secret: XXXXXXXXXXXXXX
+  bucket-name: XXXXXXXXXXXXX
 
 #本地对象存储
 minio:
-  endpoint: XXXXXXXXXXXXXXXXXXXXXXXXX
-  access-key: XXXXXXXXXXXXXXXXXXXXXXXXX
-  secret-key: XXXXXXXXXXXXXXXXXXXXXXXXX
-  bucket-name: XXXXXXXXXXXXXXXXXXXXXXXXX
+  endpoint: XXXXXXXXXXXXXXX
+  access-key: XXXXXXXXXXXXXXX
+  secret-key: XXXXXXXXXXXXXXX
+  bucket-name: XXXXXXXXXXXXXXXXX
 
-#配置图片存储方式
+#自定义配置
 recruitment:
+  #配置图片存储方式
   storage:
-    type: aliyun #配置存储方式可选 aliyun、minio
+    #配置存储方式可选 aliyun、minio
+    type: minio
+  #当前项目用户默认密码
+  default-password: 123456

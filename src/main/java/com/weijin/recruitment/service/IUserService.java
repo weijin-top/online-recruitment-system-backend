@@ -1,5 +1,6 @@
 package com.weijin.recruitment.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.weijin.recruitment.model.dto.SessionDto;
 import com.weijin.recruitment.model.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -48,4 +49,22 @@ public interface IUserService extends IService<User> {
      * @return sessionDto
      */
     SessionDto queryInfoByUserId(Integer userId);
+
+
+    /**
+     * 分页获取用户信息
+     * @param pageNum 页码
+     * @param pageSize 每页记录数
+     * @param username 用户名
+     * @param roleId 角色
+     * @return 响应
+     */
+    Result<IPage<UserVO>> pageUser(Integer pageNum, Integer pageSize, String username, Integer roleId);
+
+    /**
+     * 重置密码
+     * @param id 用户id
+     * @return 响应
+     */
+    Result<String> resetPassword(Integer id);
 }

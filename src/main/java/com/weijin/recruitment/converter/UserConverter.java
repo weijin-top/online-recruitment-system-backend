@@ -1,5 +1,7 @@
 package com.weijin.recruitment.converter;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.weijin.recruitment.model.dto.SessionDto;
 import com.weijin.recruitment.model.entity.User;
 import com.weijin.recruitment.model.from.user.RegisterFrom;
@@ -22,10 +24,12 @@ public interface UserConverter {
 
     UserVO entityToVO(User user);
 
-    User FromToEntity(UserFrom userFrom);
+    User fromToEntity(UserFrom userFrom);
 
     SessionDto entityToSessionDto(User user);
 
     SocketSession dtoToSocketSession(SessionDto sessionDto);
+
+    Page<UserVO> pageEntityToPageVO(IPage<User> page);
 
 }

@@ -1,7 +1,5 @@
 package com.weijin.recruitment.model.vo.user;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -23,6 +21,8 @@ public class UserVO {
      * 1求职者2招聘者3管理员
      */
     private Integer roleId;
+
+    private String password;
 
     private LocalDateTime createTime;
 }
